@@ -19,6 +19,7 @@ const projects = defineCollection({
       .object({ label: z.string(), kind: z.enum(['live', 'retired']) })
       .optional(),
     image: z.string().optional(),
+    alt: z.string().optional(), // accessible alt text for the image
     credit: z.string().optional(),
     blurb: z.string(),
     links: z
@@ -38,7 +39,9 @@ const builds = defineCollection({
     name: z.string(),
     tags: z.array(z.string()).default([]),
     image: z.string().optional(), // single photo
-    images: z.array(z.string()).optional(), // multiple -> swipeable gallery
+    alt: z.string().optional(), // alt for the single photo
+    // multiple photos -> swipeable gallery; each carries its own alt
+    images: z.array(z.object({ src: z.string(), alt: z.string() })).optional(),
     placeholder: z.string().optional(),
     blurb: z.string(),
   }),

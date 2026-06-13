@@ -11,6 +11,7 @@
   tags: [pytest, CI]
   stars: 838
   image: projects/diffcover.png
+  alt: "Python code coverage report with uncovered lines highlighted in pink"
   credit: >
     Originally created by Will Daly (diff-cover) and Sarina Canelake
     (diff-quality) with support from edX. I maintain it today.
@@ -28,6 +29,7 @@
   lang: Python
   tags: [web, IoT]
   image: projects/howhotistheshop.png
+  alt: "Dark dashboard reading 86 degrees in the shop, with humidity, battery, and outside weather below"
   blurb: >
     A small web page that reports the live temperature inside my wife's woodshop,
     so she can tell whether the glue will set and the finish will cure before she
@@ -44,6 +46,7 @@
   lang: Swift
   tags: [macOS, Bluetooth, reverse-engineering]
   image: projects/smartcontrol.png
+  alt: "macOS menu-bar app for Sennheiser MOMENTUM 4 headphones showing noise control, 40% battery, and sound modes"
   blurb: >
     A native macOS menu bar app for my Sennheiser MOMENTUM 4 headphones: battery,
     noise control, equalizer, and multipoint, with no Electron in sight. Building
@@ -61,6 +64,7 @@
   lang: Swift
   tags: [macOS, SwiftUI]
   image: projects/huecontrol.png
+  alt: "macOS menu-bar app for Philips Hue lights with room toggles, a color picker, brightness slider, and scene buttons"
   blurb: >
     A macOS menu bar app for Philips Hue lights, written in SwiftUI. Flip rooms
     on and off, jump between scenes, and tune color and brightness from the menu
@@ -75,6 +79,7 @@
   tags: [Android, Jetpack Compose]
   status: { label: "Google Play", kind: "live" }
   image: projects/scoundroid.png
+  alt: "Android version of the Scoundrel card game, showing a row of playing cards and a score counter"
   blurb: >
     An Android build of Scoundrel, the single-deck rogue-like card game, written
     in Kotlin and Jetpack Compose and shipped on the Google Play Store. Original
@@ -90,6 +95,7 @@
   tags: [civic data]
   status: { label: "Retired", kind: "retired" }
   image: projects/macourtreporter.png
+  alt: "Social profile banner with a smiling robot mascot and document icons on a blue background, labelled @MABillBot"
   blurb: >
     Tracked and reported on the activities of the Massachusetts legislature.
     Retired now, but a fun experiment in turning dry civic data into something a

@@ -11,15 +11,19 @@ interface Props {
 const { build: b, index, eager } = Astro.props;
 const idx = String(index).padStart(2, '0');
 
-// Normalize to a list: `images` wins, else single `image`, else none.
-const photos = b.images?.length ? b.images : b.image ? [b.image] : [];
+// Normalize to a list of {src, alt}: `images` wins, else single `image`, else none.
+const photos = b.images?.length
+  ? b.images
+  : b.image
+    ? [{ src: b.image, alt: b.alt ?? b.name }]
+    : [];
 ---
 <article class:list={['card', 'build', 'reveal', { in: eager }]}>
   {photos.length > 1 ? (
     <div class="build__media build__gallery" data-gallery>
       <div class="gallery__track">
-        {photos.map((src, i) => (
-          <Image src={cardImage(src)} alt={`${b.name}, view ${i + 1}`} />
+        {photos.map((p) => (
+          <Image src={cardImage(p.src)} alt={p.alt} />
         ))}
       </div>
       <button class="gallery__nav gallery__nav--prev" type="button" aria-label="Previous photo">‹</button>
@@ -31,7 +35,7 @@ const photos = b.images?.length ? b.images : b.image ? [b.image] : [];
       </div>
     </div>
   ) : photos.length === 1 ? (
-    <div class="build__media"><Image src={cardImage(photos[0])} alt={b.name} /></div>
+    <div class="build__media"><Image src={cardImage(photos[0].src)} alt={photos[0].alt} /></div>
   ) : (
     <div class="build__media build__media--empty"><span>{b.placeholder ?? 'Photo coming soon'}</span></div>
   )}
