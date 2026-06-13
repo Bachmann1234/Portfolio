@@ -1,0 +1,19 @@
+---
+// Shared site chrome — written once, used by every page. This is the whole point:
+// the nav can never drift out of sync between pages again.
+const { active } = Astro.props;
+const links: [string, string, string][] = [
+  ['/', 'Home', 'home'],
+  ['/software', 'Software', 'software'],
+  ['/hardware', 'Hardware', 'hardware'],
+  ['/resume', 'Résumé', 'resume'],
+];
+---
+<header class="nav"><div class="nav__in">
+  <a class="brand" href="/"><span class="brand__mark">B</span> Matt Bachmann</a>
+  <nav class="navlinks">
+    {links.map(([href, label, key]) => (
+      <a class="navlink" href={href} aria-current={active === key ? 'page' : undefined}>{label}</a>
+    ))}
+  </nav>
+</div></header>

@@ -1,24 +1,23 @@
 name: Deploy site
 
-# Assembles the static site and deploys it to Cloudflare Pages.
+# Builds the Astro site and deploys it to Cloudflare Workers Static Assets.
 #
 # Résumé content/PDF are NOT stored here — they're pulled from the resume repo's
-# rolling "latest" release at deploy time, so the résumé has a single source of
-# truth (github.com/Bachmann1234/resume, resume.yaml).
+# rolling "latest" release at build time, so the résumé has a single source of
+# truth (github.com/Bachmann1234/resume, resume.yaml). resume.astro reads the
+# fetched resume.json; the PDF is dropped into public/ so /resume.pdf works.
 #
-# Deploys to Cloudflare Workers Static Assets (config in wrangler.toml).
+# Deploy target (./dist) is configured in wrangler.toml.
 #
 # Required repo secrets (Settings → Secrets and variables → Actions):
-#   CLOUDFLARE_API_TOKEN   token with "Workers Scripts: Edit" (the
-#                          "Edit Cloudflare Workers" template covers it)
+#   CLOUDFLARE_API_TOKEN   token with "Workers Scripts: Edit"
 #   CLOUDFLARE_ACCOUNT_ID  your Cloudflare account ID
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
-  # Lets the resume repo trigger a redeploy when the résumé changes (optional;
-  # needs a cross-repo dispatch step on that side). Safe to leave in place.
+  # Lets the resume repo trigger a redeploy when the résumé changes.
   repository_dispatch:
     types: [resume-updated]
 
@@ -39,31 +38,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         with:
-          python-version: "3.12"
+          node-version: "24"
+          cache: "npm"
 
-      - name: Install Python deps
-        run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: npm ci
 
       - name: Fetch résumé artifacts from the resume repo
         run: |
           set -euo pipefail
-          mkdir -p dist
           base=https://github.com/Bachmann1234/resume/releases/download/latest
-          curl -fsSL -o resume.json   "$base/resume.json"
-          curl -fsSL -o dist/resume.pdf "$base/cv.pdf"
+          mkdir -p data public
+          # data/ (not the project root) so it can't shadow the /resume route.
+          curl -fsSL -o data/resume.json "$base/resume.json"
+          curl -fsSL -o public/resume.pdf "$base/cv.pdf"
 
-      - name: Render resume.html from resume.json
-        run: python build_resume.py resume.json
+      - name: Build site
+        run: npm run build
 
-      - name: Assemble site into dist/
-        run: |
-          cp index.html resume.html dist/
-          cp -r assets dist/
-
-      # Reads wrangler.toml (name + [assets] directory). Creates the Worker on
-      # the first run, updates it after. No dashboard project setup needed.
+      # Reads wrangler.toml (name + [assets] directory = ./dist). Creates the
+      # Worker on the first run, updates it after.
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:

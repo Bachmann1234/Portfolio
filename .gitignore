@@ -1,19 +1,18 @@
-# Résumé PDF is fetched from the Bachmann1234/resume repo at deploy time
-resume.pdf
+# Build output
+dist/
+.astro/
 
-# Python (resume.json -> resume.html render step)
-.venv/
-__pycache__/
+# Dependencies
+node_modules/
+
+# Résumé content + PDF — single-sourced from the Bachmann1234/resume repo,
+# fetched at build time (CI) or from the sibling checkout (local dev).
+resume.json
+public/resume.pdf
 
 # OS / editor cruft
 .DS_Store
 
-# Playwright MCP scratch output
+# Local preview / screenshot artifacts (card images live in public/assets/)
 .playwright-mcp/
-
-# Deploy build output / fetched résumé artifacts
-dist/
-resume.json
-
-# Wrangler local state
-.wrangler/
+/*.png

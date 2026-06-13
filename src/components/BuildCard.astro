@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import { cardImage } from '../lib/images';
+
+interface Props {
+  build: CollectionEntry<'builds'>['data'];
+  index: number; // 1-based, shown as the 01..NN card index
+  eager?: boolean;
+}
+const { build: b, index, eager } = Astro.props;
+const idx = String(index).padStart(2, '0');
+
+// Normalize to a list of {src, alt}: `images` wins, else single `image`, else none.
+const photos = b.images?.length
+  ? b.images
+  : b.image
+    ? [{ src: b.image, alt: b.alt ?? b.name }]
+    : [];
+---
+<article class:list={['card', 'build', 'reveal', { in: eager }]}>
+  {photos.length > 1 ? (
+    <div class="build__media build__gallery" data-gallery>
+      <div class="gallery__track">
+        {photos.map((p) => (
+          <Image src={cardImage(p.src)} alt={p.alt} loading={eager ? 'eager' : 'lazy'} />
+        ))}
+      </div>
+      <button class="gallery__nav gallery__nav--prev" type="button" aria-label="Previous photo">‹</button>
+      <button class="gallery__nav gallery__nav--next" type="button" aria-label="Next photo">›</button>
+      <div class="gallery__dots">
+        {photos.map((_, i) => (
+          <button class:list={['gdot', { on: i === 0 }]} type="button" aria-label={`Photo ${i + 1}`}></button>
+        ))}
+      </div>
+    </div>
+  ) : photos.length === 1 ? (
+    <div class="build__media"><Image src={cardImage(photos[0].src)} alt={photos[0].alt} loading={eager ? 'eager' : 'lazy'} /></div>
+  ) : (
+    <div class="build__media build__media--empty"><span>{b.placeholder ?? 'Photo coming soon'}</span></div>
+  )}
+  <div class="build__body">
+    <div class="build__top"><h3>{b.name}</h3><span class="idx">{idx}</span></div>
+    <p>{b.blurb}</p>
+    <div class="tags">{b.tags.map((t) => <span class="tag">{t}</span>)}</div>
+  </div>
+</article>

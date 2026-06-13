@@ -1,76 +1,67 @@
-# mattbachmann.dev
+# Portfolio — mattbachmann.dev
 
-Personal portfolio — a static "Maker's Journal" site for my résumé and, in time,
-write-ups of my software and hardware projects.
+Personal site: software projects, hardware builds, and my résumé. Built with
+[Astro](https://astro.build) (static output — plain HTML/CSS, no client JS
+framework), deployed to Cloudflare Workers Static Assets.
 
-Built from a [Claude Design](https://claude.ai/design) mockup. Plain
-HTML/CSS/JS, no build framework.
-
-## Branches
-
-- **`main`** — what's deployed: a minimal landing page + the full résumé. This
-  is intentionally slim while the rest is built out.
-- **`full-site`** — work in progress: the full four-page design (home, software,
-  hardware, résumé) with placeholder content being replaced page by page. Merges
-  into `main` when ready.
-
-## Structure (`main`)
+## Structure
 
 ```
-index.html        Minimal landing page
-resume.html       Full résumé, rendered from the resume repo's resume.json
-templates/
-  resume.html.j2  Résumé layout template (content comes from resume.json)
-build_resume.py   Renders resume.html from resume.json
-assets/
-  site.css        Design system: 3 color themes × light/dark, 2 font sets
-  site.js         Theme / font / mode switching, persisted to localStorage
+src/
+  pages/             One file per route: index, software, hardware, resume
+  layouts/Base.astro   Shared chrome (nav + footer) — defined once
+  components/          Nav, Footer, ProjectCard, BuildCard
+  content.config.ts    Content collections + Zod schemas (validated at build)
+  data/
+    projects.yaml      The Software list  (add a project = append an entry)
+    builds.yaml        The Hardware list  (add a build  = append an entry)
+public/
+  assets/             site.css, site.js, favicon, screenshots, project images
 ```
 
-Default look is **dark + Forest & Rust**; visitors can switch themes, fonts,
-and light/dark from the nav (their choice is remembered).
+Adding to the running lists is data-only: append an entry to
+`src/data/projects.yaml` or `src/data/builds.yaml`. The schema in
+`content.config.ts` validates it at build time, so a typo'd field or a missing
+required key fails `npm run build` instead of rendering broken.
 
-## Résumé content & PDF
+## Résumé
 
-The résumé has a single source of truth in
-[Bachmann1234/resume](https://github.com/Bachmann1234/resume) (`resume.yaml`).
-That repo's CI publishes two artifacts to its `latest` release:
+Résumé **content** is NOT stored here. It is single-sourced from the
+[Bachmann1234/resume](https://github.com/Bachmann1234/resume) repo
+(`resume.yaml` → `resume.json` + `cv.pdf`, published to that repo's rolling
+`latest` release). `src/pages/resume.astro` reads `resume.json` at build time:
 
-- `resume.json` — rendered into `resume.html` by `build_resume.py`
-- `cv.pdf` — the downloadable résumé, dropped in as `resume.pdf` at deploy time
-  (git-ignored here)
+- **CI** fetches `resume.json` (and `cv.pdf` → `public/resume.pdf`) from the
+  release before building.
+- **Local dev** falls back to the sibling checkout at `../resume/build/resume.json`.
 
+So the résumé page and PDF stay in sync with one source of truth.
+
+## Local development
+
+```bash
+npm install
+npm run dev        # http://localhost:4321
 ```
-https://github.com/Bachmann1234/resume/releases/download/latest/resume.json
-https://github.com/Bachmann1234/resume/releases/download/latest/cv.pdf
+
+`resume.json` is gitignored; local dev reads it from the sibling `resume`
+checkout (`../resume`). To preview the PDF link locally, drop a `resume.pdf`
+into `public/`.
+
+## Build & deploy
+
+```bash
+npm run build      # static site → dist/
 ```
 
-Refresh the résumé locally:
+`.github/workflows/deploy.yml` runs on push to `main`: installs deps, fetches
+the résumé artifacts, `npm run build`, then `wrangler deploy` (Cloudflare
+Workers Static Assets, configured in `wrangler.toml` — serves `./dist`). The
+résumé repo can trigger a redeploy via a `resume-updated` repository dispatch.
 
-```sh
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-# point at a local resume.json (sibling checkout) or a downloaded one
-.venv/bin/python build_resume.py [path/to/resume.json]
-```
+Required repo secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
 
 ## Hosting
 
-Deployed to **Cloudflare Workers Static Assets** (config in `wrangler.toml`),
-served from the apex `mattbachmann.dev` (DNS on Cloudflare). The
-`.github/workflows/deploy.yml` Action assembles `dist/` (site + résumé PDF
-fetched from the resume release) and runs `wrangler deploy` on every push to
-`main`.
-
-## Local preview
-
-```sh
-python3 -m http.server 8000
-# then open http://localhost:8000
-```
-
-## Still to build (on `full-site`)
-
-- Software project lineup + real write-ups.
-- Hardware builds + photos.
-- Restore full home page (hero, about, dog) and 4-way nav.
-- Contact email (placeholder `you@example.com` in footers).
+Served from the apex `mattbachmann.dev` (DNS on Cloudflare). `workers.dev` and
+preview URLs are intentionally disabled in `wrangler.toml`.
