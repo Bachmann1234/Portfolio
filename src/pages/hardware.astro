@@ -21,7 +21,7 @@ const builds = (await getCollection('builds')).sort(
 
     <div class="grid">
       {builds.map((entry, i) => (
-        <BuildCard build={entry.data} index={i + 1} eager={i < 2} />
+        <BuildCard build={entry.data} index={i + 1} eager={i < 4} />
       ))}
     </div>
   </main>

@@ -22,8 +22,8 @@ const photos = b.images?.length
   {photos.length > 1 ? (
     <div class="build__media build__gallery" data-gallery>
       <div class="gallery__track">
-        {photos.map((p, i) => (
-          <Image src={cardImage(p.src)} alt={p.alt} loading={i === 0 && eager ? 'eager' : 'lazy'} />
+        {photos.map((p) => (
+          <Image src={cardImage(p.src)} alt={p.alt} loading={eager ? 'eager' : 'lazy'} />
         ))}
       </div>
       <button class="gallery__nav gallery__nav--prev" type="button" aria-label="Previous photo">‹</button>
