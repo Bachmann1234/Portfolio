@@ -5,7 +5,7 @@
 # Omit both and add `placeholder:` to show an empty slot.
 
 - id: cocktail-scale
-  order: 1
+  order: 2
   name: Cocktail Scale
   tags: [load cell, microcontroller, 3D print]
   image: /assets/images/builds/cocktail-scale.jpg
@@ -14,7 +14,7 @@
     weight so every drink comes out balanced.
 
 - id: eink-art-display
-  order: 2
+  order: 3
   name: E-ink Art Display
   tags: [Raspberry Pi, e-ink, Python]
   image: /assets/images/builds/eink-art-display.jpg
@@ -23,7 +23,7 @@
     internet: a quiet, paper-like picture that changes on its own.
 
 - id: sit-stand-timer
-  order: 3
+  order: 1
   name: Sit / Stand Timer
   tags: [ultrasonic, microcontroller]
   images:
