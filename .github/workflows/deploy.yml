@@ -50,8 +50,9 @@ jobs:
         run: |
           set -euo pipefail
           base=https://github.com/Bachmann1234/resume/releases/download/latest
-          curl -fsSL -o resume.json "$base/resume.json"
-          mkdir -p public
+          mkdir -p data public
+          # data/ (not the project root) so it can't shadow the /resume route.
+          curl -fsSL -o data/resume.json "$base/resume.json"
           curl -fsSL -o public/resume.pdf "$base/cv.pdf"
 
       - name: Build site

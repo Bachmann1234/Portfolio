@@ -4,8 +4,9 @@ import Base from '../layouts/Base.astro';
 
 // Résumé CONTENT is single-sourced from the Bachmann1234/resume repo
 // (resume.yaml -> resume.json). It is fetched at build time, NOT stored here.
-// CI curls resume.json to the project root before `astro build`; for local dev
-// we fall back to the sibling resume checkout.
+// CI curls it to data/resume.json before `astro build`; local dev falls back to
+// the sibling resume checkout. It MUST live outside the project root (in data/):
+// a root-level resume.json gets served by Vite at /resume and shadows this page.
 interface Resume {
   name: { first: string; last: string; full: string };
   tagline: string;
@@ -18,7 +19,7 @@ interface Resume {
 }
 
 function loadResume(): Resume {
-  const candidates = ['resume.json', '../resume/build/resume.json'];
+  const candidates = ['data/resume.json', '../resume/build/resume.json'];
   for (const p of candidates) {
     try {
       return JSON.parse(fs.readFileSync(p, 'utf-8'));
