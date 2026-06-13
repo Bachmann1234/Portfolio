@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="forest" data-font="journal" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hardware — Matt Bachmann</title>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .build { padding: 0; }
+  .build image-slot { width: 100%; height: 240px; display: block; }
+  .build__body { padding: 24px 28px 26px; display: flex; flex-direction: column; flex: 1; }
+  .build__top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .build h3 { font-size: 25px; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .build .idx { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); letter-spacing: 0.1em; }
+  .build p { color: var(--ink-soft); font-size: 16px; margin: 0 0 16px; }
+  .build .tags { margin-top: auto; }
+  .note { background: var(--tint); border: 1px solid var(--rule-soft); border-radius: 12px; padding: 16px 20px; margin: 0 0 30px; font-family: var(--font-mono); font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+  .note b { color: var(--ink); }
+  @media (max-width: 760px){ .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav__in">
+  <a class="brand" href="index.html"><span class="brand__mark">MB</span> Matt Bachmann</a>
+  <nav class="navlinks">
+    <a class="navlink" href="index.html">Home</a>
+    <a class="navlink" href="software.html">Software</a>
+    <a class="navlink" href="hardware.html" aria-current="page">Hardware</a>
+    <a class="navlink" href="resume.html">Résumé</a>
+  </nav>
+  <div class="switcher">
+    <div class="swatches" role="group" aria-label="Color theme">
+      <button class="swatch swatch--forest" data-theme="forest" title="Forest &amp; Rust" aria-label="Forest and Rust theme"></button>
+      <button class="swatch swatch--teal" data-theme="teal" title="Teal &amp; Slate" aria-label="Teal and Slate theme"></button>
+      <button class="swatch swatch--berner" data-theme="berner" title="Berner" aria-label="Berner theme"></button>
+    </div>
+    <button class="fontbtn" type="button">Aa · Newsreader</button>
+    <button class="modebtn" type="button" title="Toggle light / dark">☾</button>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <header class="phead">
+    <span class="kicker">02 / Workbench</span>
+    <h1>Hardware</h1>
+    <p class="lede">The electronics drawer — microcontroller builds that solve small, real problems around the house (and a few just because).</p>
+  </header>
+
+  <p class="note reveal in">📷 <b>Drop your photos right in.</b> Each card has an empty photo slot — drag a build photo onto it and it sticks. Seeded with projects from your Electronics-Drawer repo; tell me which to keep and I'll finalize the write-ups.</p>
+
+  <div class="grid">
+
+    <article class="card build reveal in">
+      <image-slot id="hw-cocktail" placeholder="Drop a photo of the cocktail scale" shape="rect"></image-slot>
+      <div class="build__body">
+        <div class="build__top"><h3>Cocktail Scale</h3><span class="idx">01</span></div>
+        <p>A custom kitchen scale for the home bar — measures cocktail ingredients by weight so every drink comes out balanced.</p>
+        <div class="tags"><span class="tag">load cell</span><span class="tag">microcontroller</span><span class="tag">3D print</span></div>
+      </div>
+    </article>
+
+    <article class="card build reveal in">
+      <image-slot id="hw-button" placeholder="Drop a photo of the giant button" shape="rect"></image-slot>
+      <div class="build__body">
+        <div class="build__top"><h3>Giant Button</h3><span class="idx">02</span></div>
+        <p>An oversized keyboard switch, programmable to fire any keystroke or macro. Equal parts useful shortcut and desk toy.</p>
+        <div class="tags"><span class="tag">HID</span><span class="tag">QMK</span><span class="tag">mechanical</span></div>
+      </div>
+    </article>
+
+    <article class="card build reveal">
+      <image-slot id="hw-eink" placeholder="Drop a photo of the e-ink frame" shape="rect"></image-slot>
+      <div class="build__body">
+        <div class="build__top"><h3>E-ink Art Display</h3><span class="idx">03</span></div>
+        <p>A Raspberry-Pi-powered e-ink frame that pulls fresh artwork from the internet — a quiet, paper-like picture that changes on its own.</p>
+        <div class="tags"><span class="tag">Raspberry Pi</span><span class="tag">e-ink</span><span class="tag">Python</span></div>
+      </div>
+    </article>
+
+    <article class="card build reveal">
+      <image-slot id="hw-sitstand" placeholder="Drop a photo of the sit/stand timer" shape="rect"></image-slot>
+      <div class="build__body">
+        <div class="build__top"><h3>Sit / Stand Timer</h3><span class="idx">04</span></div>
+        <p>Two timers that track standing-desk up/down time using a sonar sensor — a gentle nudge to actually use the standing part.</p>
+        <div class="tags"><span class="tag">ultrasonic</span><span class="tag">microcontroller</span></div>
+      </div>
+    </article>
+
+    <article class="card build reveal">
+      <image-slot id="hw-morse" placeholder="Drop a photo of the morse key" shape="rect"></image-slot>
+      <div class="build__body">
+        <div class="build__top"><h3>USB Morse Code Key</h3><span class="idx">05</span></div>
+        <p>A telegraph-style key that registers as an external keyboard — tap out morse on an Android phone (or anything that takes a USB keyboard).</p>
+        <div class="tags"><span class="tag">HID</span><span class="tag">Android</span><span class="tag">retro</span></div>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<footer class="foot"><div class="foot__in">
+  <small>© 2026 Matt Bachmann · Medford, MA</small>
+  <div class="foot__links">
+    <a class="tlink" href="https://github.com/Bachmann1234/Electronics-Drawer">Electronics Drawer</a>
+    <a class="tlink" href="https://github.com/Bachmann1234">GitHub</a>
+    <a class="tlink" href="mailto:you@example.com">Email →&nbsp;add yours</a>
+  </div>
+</div></footer>
+
+<script src="assets/image-slot.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>

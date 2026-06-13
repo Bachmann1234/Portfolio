@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="forest" data-font="journal" data-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Software — Matt Bachmann</title>
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; padding-bottom: 8px; }
+  .proj { padding: 30px 30px 26px; }
+  .proj__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+  .proj__stars { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); display: inline-flex; align-items: center; gap: 5px; }
+  .proj h3 { font-size: 27px; margin-bottom: 8px; letter-spacing: -0.02em; }
+  .proj p { color: var(--ink-soft); font-size: 16.5px; margin: 0 0 18px; }
+  .proj__foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 16px; border-top: 1px solid var(--rule-soft); }
+  .proj__links { display: flex; gap: 16px; }
+  .draft { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-deep); background: var(--accent-tint); padding: 3px 8px; border-radius: 5px; }
+  .addcard {
+    border: 1.5px dashed var(--rule); background: transparent; box-shadow: none;
+    display: grid; place-items: center; text-align: center; padding: 40px; min-height: 220px;
+  }
+  .addcard:hover { transform: none; box-shadow: none; border-color: var(--ink-faint); }
+  .addcard .plus { font-family: var(--font-display); font-size: 40px; color: var(--ink-faint); line-height: 1; }
+  .addcard p { font-family: var(--font-mono); font-size: 13px; color: var(--ink-faint); margin: 12px 0 0; max-width: 26ch; }
+  .note { background: var(--tint); border: 1px solid var(--rule-soft); border-radius: 12px; padding: 16px 20px; margin: 0 0 30px; font-family: var(--font-mono); font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+  .note b { color: var(--ink); }
+  @media (max-width: 760px){ .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="nav__in">
+  <a class="brand" href="index.html"><span class="brand__mark">MB</span> Matt Bachmann</a>
+  <nav class="navlinks">
+    <a class="navlink" href="index.html">Home</a>
+    <a class="navlink" href="software.html" aria-current="page">Software</a>
+    <a class="navlink" href="hardware.html">Hardware</a>
+    <a class="navlink" href="resume.html">Résumé</a>
+  </nav>
+  <div class="switcher">
+    <div class="swatches" role="group" aria-label="Color theme">
+      <button class="swatch swatch--forest" data-theme="forest" title="Forest &amp; Rust" aria-label="Forest and Rust theme"></button>
+      <button class="swatch swatch--teal" data-theme="teal" title="Teal &amp; Slate" aria-label="Teal and Slate theme"></button>
+      <button class="swatch swatch--berner" data-theme="berner" title="Berner" aria-label="Berner theme"></button>
+    </div>
+    <button class="fontbtn" type="button">Aa · Newsreader</button>
+    <button class="modebtn" type="button" title="Toggle light / dark">☾</button>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <header class="phead">
+    <span class="kicker">01 / Work</span>
+    <h1>Software</h1>
+    <p class="lede">Open-source tools and libraries — built to be useful, well-tested, and kind to whoever reads the code next.</p>
+  </header>
+
+  <p class="note reveal in">📝 <b>Draft layout.</b> I've seeded this with a few of your real repos as examples — you said you'd choose the final lineup later. Tell me which to keep, drop, or add and I'll write proper blurbs.</p>
+
+  <div class="grid">
+
+    <article class="card proj reveal in">
+      <div class="proj__top">
+        <div class="tags"><span class="tag tag--lang">Python</span><span class="tag">pytest</span><span class="tag">CI</span></div>
+        <span class="proj__stars">★ 838</span>
+      </div>
+      <h3>diff_cover</h3>
+      <p>Reports which lines changed in a diff still need test coverage — so reviews focus on what's new, not the whole codebase. Widely used across Python CI pipelines.</p>
+      <div class="proj__foot">
+        <div class="proj__links">
+          <a class="tlink" href="https://github.com/Bachmann1234/diff-cover">Repo →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card proj reveal in">
+      <div class="proj__top">
+        <div class="tags"><span class="tag tag--lang">Java</span><span class="tag">Jupyter</span></div>
+        <span class="proj__stars">★ 72</span>
+      </div>
+      <h3>java9_kernel</h3>
+      <p>An IPython/Jupyter kernel for Java 9, built on the new <span class="mono">jshell</span> REPL — write and run Java interactively, notebook-style.</p>
+      <div class="proj__foot">
+        <div class="proj__links">
+          <a class="tlink" href="https://github.com/Bachmann1234/java9_kernel">Repo →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card proj reveal in">
+      <div class="proj__top">
+        <div class="tags"><span class="tag tag--lang">Python</span><span class="tag">serialization</span></div>
+        <span class="proj__stars">★ 59</span>
+      </div>
+      <h3>marshmallow-polyfield</h3>
+      <p>An extension to marshmallow that adds polymorphic fields — schemas that pick their shape at runtime based on the data they're handed.</p>
+      <div class="proj__foot">
+        <div class="proj__links">
+          <a class="tlink" href="https://github.com/Bachmann1234/marshmallow-polyfield">Repo →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card proj reveal">
+      <div class="proj__top">
+        <div class="tags"><span class="tag tag--lang">Python</span><span class="tag">just for fun</span></div>
+        <span class="draft">pick me?</span>
+      </div>
+      <h3>sortinghat</h3>
+      <p>A Harry Potter Sorting Hat — a small, delightful side project. The kind of thing that's pure fun to build and even more fun to demo.</p>
+      <div class="proj__foot">
+        <div class="proj__links">
+          <a class="tlink" href="https://github.com/Bachmann1234">Repo →</a>
+        </div>
+      </div>
+    </article>
+
+    <a class="card proj addcard reveal" href="https://github.com/Bachmann1234" style="text-decoration:none;color:inherit">
+      <div>
+        <div class="plus">+</div>
+        <p>Add a project — point me at the repo and I'll write it up.</p>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<footer class="foot"><div class="foot__in">
+  <small>© 2026 Matt Bachmann · Medford, MA</small>
+  <div class="foot__links">
+    <a class="tlink" href="https://github.com/Bachmann1234">GitHub</a>
+    <a class="tlink" href="https://bsky.app/profile/mattbachmann.dev">Bluesky</a>
+    <a class="tlink" href="mailto:you@example.com">Email →&nbsp;add yours</a>
+  </div>
+</div></footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

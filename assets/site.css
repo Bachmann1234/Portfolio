@@ -1,0 +1,392 @@
+/* ============================================================
+   Matt Bachmann — Portfolio  ·  "Maker's Journal"
+   Shared stylesheet: theming, type, layout primitives
+   ============================================================ */
+
+/* ---- Fonts ---- */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* ============================================================
+   THEME TOKENS
+   Base = warm paper "journal" feel, shared by all themes.
+   Each [data-theme] overrides only the color personality.
+   ============================================================ */
+:root {
+  /* paper + ink (warm, low chroma) */
+  --paper:        oklch(0.972 0.009 95);
+  --paper-2:      oklch(0.945 0.012 92);   /* sunk panels */
+  --card:         oklch(0.995 0.004 95);
+  --ink:          oklch(0.255 0.014 60);
+  --ink-soft:     oklch(0.44 0.013 62);
+  --ink-faint:    oklch(0.60 0.012 65);
+  --rule:         oklch(0.255 0.014 60 / 0.14);
+  --rule-soft:    oklch(0.255 0.014 60 / 0.08);
+
+  /* personality (overridden per theme) */
+  --primary:      oklch(0.45 0.09 155);
+  --primary-deep: oklch(0.36 0.08 155);
+  --accent:       oklch(0.58 0.135 50);
+  --accent-deep:  oklch(0.47 0.12 48);
+  --on-primary:   oklch(0.98 0.01 95);
+  --tint:         oklch(0.45 0.09 155 / 0.07);   /* faint primary wash */
+  --accent-tint:  oklch(0.58 0.135 50 / 0.10);
+
+  /* type families (overridden per font set) */
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body:    'Newsreader', Georgia, serif;
+  --font-mono:    'Space Mono', ui-monospace, monospace;
+
+  --maxw: 1120px;
+  --shadow: 0 1px 2px oklch(0.25 0.02 60 / 0.05), 0 8px 24px -12px oklch(0.25 0.02 60 / 0.22);
+  --shadow-lg: 0 2px 4px oklch(0.25 0.02 60 / 0.06), 0 20px 50px -20px oklch(0.25 0.02 60 / 0.30);
+}
+
+/* ---- THEME: Forest & Rust (default) ---- */
+[data-theme="forest"] {
+  --primary:      oklch(0.46 0.088 155);
+  --primary-deep: oklch(0.35 0.075 156);
+  --accent:       oklch(0.585 0.135 50);
+  --accent-deep:  oklch(0.47 0.12 48);
+  --tint:         oklch(0.46 0.088 155 / 0.08);
+  --accent-tint:  oklch(0.585 0.135 50 / 0.11);
+  --paper:        oklch(0.972 0.010 95);
+  --paper-2:      oklch(0.945 0.013 92);
+}
+
+/* ---- THEME: Teal & Slate ---- */
+[data-theme="teal"] {
+  --primary:      oklch(0.50 0.078 215);
+  --primary-deep: oklch(0.39 0.07 218);
+  --accent:       oklch(0.585 0.10 200);
+  --accent-deep:  oklch(0.47 0.09 205);
+  --tint:         oklch(0.50 0.078 215 / 0.09);
+  --accent-tint:  oklch(0.585 0.10 200 / 0.12);
+  --paper:        oklch(0.972 0.006 230);
+  --paper-2:      oklch(0.945 0.009 228);
+  --card:         oklch(0.995 0.003 230);
+  --ink:          oklch(0.255 0.014 250);
+  --ink-soft:     oklch(0.44 0.013 248);
+  --ink-faint:    oklch(0.60 0.012 245);
+  --rule:         oklch(0.255 0.014 250 / 0.14);
+  --rule-soft:    oklch(0.255 0.014 250 / 0.08);
+}
+
+/* ---- THEME: Berner (charcoal / cream / rust, grass-green secondary) ---- */
+[data-theme="berner"] {
+  --primary:      oklch(0.30 0.014 60);    /* the black coat */
+  --primary-deep: oklch(0.22 0.012 60);
+  --accent:       oklch(0.55 0.145 47);    /* rust eyebrows / legs */
+  --accent-deep:  oklch(0.45 0.13 45);
+  --tint:         oklch(0.30 0.014 60 / 0.07);
+  --accent-tint:  oklch(0.55 0.145 47 / 0.12);
+  --paper:        oklch(0.965 0.013 90);   /* cream fur */
+  --paper-2:      oklch(0.935 0.016 88);
+  --card:         oklch(0.992 0.006 92);
+  /* grass-green secondary, used sparingly via --green */
+  --green:        oklch(0.52 0.085 150);
+}
+:root { --green: var(--primary); }
+
+/* ============================================================
+   FONT SETS
+   ============================================================ */
+[data-font="journal"] {
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body:    'Newsreader', Georgia, serif;
+  --font-mono:    'Space Mono', ui-monospace, monospace;
+}
+[data-font="spectral"] {
+  --font-display: 'Spectral', Georgia, serif;
+  --font-body:    'Spectral', Georgia, serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ============================================================
+   RESET + BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.62;
+  color: var(--ink);
+  background: var(--paper);
+  background-image:
+    radial-gradient(oklch(0.25 0.02 60 / 0.018) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color .35s ease, color .35s ease;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; line-height: 1.08; margin: 0; letter-spacing: -0.012em; }
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+::selection { background: var(--accent-tint); }
+
+.mono { font-family: var(--font-mono); }
+.wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(20px, 5vw, 48px); }
+
+/* ============================================================
+   KICKER / LABELS
+   ============================================================ */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.kicker::before {
+  content: "";
+  width: 22px; height: 1px;
+  background: var(--accent);
+  display: inline-block;
+}
+
+/* ============================================================
+   TOP NAV  (shared across pages)
+   ============================================================ */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: oklch(0.972 0.009 95 / 0.82);
+  backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--rule-soft);
+}
+[data-theme="teal"] .nav { background: oklch(0.972 0.006 230 / 0.82); }
+[data-theme="berner"] .nav { background: oklch(0.965 0.013 90 / 0.85); }
+.nav__in {
+  max-width: var(--maxw); margin-inline: auto;
+  padding: 14px clamp(20px, 5vw, 48px);
+  display: flex; align-items: center; gap: 24px;
+}
+.brand {
+  display: inline-flex; align-items: center; gap: 11px;
+  text-decoration: none; color: var(--ink); font-family: var(--font-display);
+  font-size: 19px; font-weight: 600; letter-spacing: -0.02em;
+  margin-right: auto; white-space: nowrap;
+}
+@media (max-width: 600px){ .brand span:not(.brand__mark){ display:none; } }
+.brand__mark {
+  width: 30px; height: 30px; border-radius: 9px;
+  background: var(--primary); color: var(--on-primary);
+  display: grid; place-items: center;
+  font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+  box-shadow: inset 0 0 0 1px oklch(1 0 0 / 0.12);
+}
+.navlinks { display: flex; gap: 4px; align-items: center; }
+.navlink {
+  font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.04em;
+  text-transform: uppercase; text-decoration: none; color: var(--ink-soft);
+  padding: 7px 12px; border-radius: 8px; transition: all .18s ease;
+  white-space: nowrap;
+}
+.navlink:hover { color: var(--ink); background: var(--tint); }
+.navlink[aria-current="page"] { color: var(--primary-deep); background: var(--tint); }
+[data-theme="berner"] .navlink[aria-current="page"] { color: var(--accent-deep); background: var(--accent-tint); }
+
+/* theme / font switcher */
+.switcher { display: flex; align-items: center; gap: 14px; }
+.swatches { display: flex; gap: 7px; }
+.swatch {
+  width: 22px; height: 22px; border-radius: 50%; cursor: pointer;
+  border: 2px solid transparent; padding: 0; position: relative;
+  box-shadow: inset 0 0 0 1px oklch(0.25 0.02 60 / 0.12);
+  transition: transform .15s ease;
+}
+.swatch:hover { transform: scale(1.12); }
+.swatch[aria-pressed="true"] { border-color: var(--ink); }
+.swatch--forest { background: linear-gradient(135deg, oklch(0.46 0.088 155) 60%, oklch(0.585 0.135 50) 60%); }
+.swatch--teal   { background: linear-gradient(135deg, oklch(0.50 0.078 215) 60%, oklch(0.585 0.10 200) 60%); }
+.swatch--berner { background: linear-gradient(135deg, oklch(0.30 0.014 60) 60%, oklch(0.55 0.145 47) 60%); }
+.fontbtn {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ink-soft); cursor: pointer;
+  background: none; border: 1px solid var(--rule); border-radius: 7px;
+  padding: 6px 10px; transition: all .18s ease;
+}
+.fontbtn:hover { color: var(--ink); border-color: var(--ink-faint); }
+
+/* mobile: hide labels gracefully */
+@media (max-width: 720px) {
+  .navlink { padding: 6px 8px; font-size: 11px; }
+  .fontbtn { display: none; }
+  .nav__in { gap: 12px; flex-wrap: wrap; }
+}
+
+/* ============================================================
+   BUTTONS / LINKS
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em;
+  text-decoration: none; cursor: pointer;
+  padding: 12px 20px; border-radius: 10px; border: 1px solid transparent;
+  transition: all .18s ease;
+}
+.btn--primary { background: var(--primary); color: var(--on-primary); box-shadow: var(--shadow); }
+.btn--primary:hover { background: var(--primary-deep); transform: translateY(-1px); }
+.btn--ghost { background: transparent; color: var(--ink); border-color: var(--rule); }
+.btn--ghost:hover { border-color: var(--ink-faint); background: var(--card); }
+.btn .arr { transition: transform .18s ease; }
+.btn:hover .arr { transform: translateX(3px); }
+
+.tlink {
+  font-family: var(--font-mono); font-size: 13px; color: var(--primary-deep);
+  text-decoration: none; border-bottom: 1px solid currentColor;
+  padding-bottom: 1px; transition: opacity .15s ease;
+}
+[data-theme="berner"] .tlink { color: var(--accent-deep); }
+.tlink:hover { opacity: 0.65; }
+
+/* ============================================================
+   TAGS / CHIPS
+   ============================================================ */
+.tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.tag {
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.02em;
+  color: var(--ink-soft); background: var(--paper-2);
+  border: 1px solid var(--rule-soft); border-radius: 6px;
+  padding: 4px 9px;
+}
+.tag--lang { color: var(--primary-deep); background: var(--tint); border-color: transparent; }
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: var(--card); border: 1px solid var(--rule-soft);
+  border-radius: 16px; box-shadow: var(--shadow);
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--rule); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot {
+  margin-top: 96px; border-top: 1px solid var(--rule);
+  background: var(--paper-2);
+}
+.foot__in {
+  max-width: var(--maxw); margin-inline: auto;
+  padding: 44px clamp(20px, 5vw, 48px);
+  display: flex; flex-wrap: wrap; gap: 28px; align-items: center;
+  justify-content: space-between;
+}
+.foot__links { display: flex; flex-wrap: wrap; gap: 18px; }
+.foot small { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); letter-spacing: 0.03em; }
+
+/* ============================================================
+   PHOTO SLOTS / FIGURES
+   ============================================================ */
+image-slot {
+  --slot-bg: var(--paper-2);
+  background: var(--paper-2);
+}
+.figcap {
+  font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint);
+  letter-spacing: 0.02em; margin-top: 9px;
+}
+
+/* ============================================================
+   PAGE HEADER (section pages)
+   ============================================================ */
+.phead { padding: clamp(48px, 8vw, 92px) 0 clamp(28px, 5vw, 44px); }
+.phead h1 { font-size: clamp(40px, 7vw, 72px); margin: 16px 0 0; }
+.phead .lede { font-size: clamp(19px, 2.4vw, 23px); color: var(--ink-soft); max-width: 56ch; margin-top: 18px; font-style: italic; }
+
+/* ============================================================
+   DARK MODE  ·  works under every color theme
+   ============================================================ */
+[data-mode="dark"] {
+  --paper:     oklch(0.188 0.012 65);
+  --paper-2:   oklch(0.156 0.011 65);
+  --card:      oklch(0.234 0.013 66);
+  --ink:       oklch(0.930 0.010 82);
+  --ink-soft:  oklch(0.780 0.012 80);
+  --ink-faint: oklch(0.605 0.012 76);
+  --rule:      oklch(0.930 0.010 82 / 0.16);
+  --rule-soft: oklch(0.930 0.010 82 / 0.085);
+  --shadow:    0 1px 2px oklch(0 0 0 / 0.40), 0 10px 30px -14px oklch(0 0 0 / 0.55);
+  --shadow-lg: 0 2px 4px oklch(0 0 0 / 0.45), 0 26px 60px -24px oklch(0 0 0 / 0.70);
+}
+[data-mode="dark"] body {
+  background-image: radial-gradient(oklch(0.95 0.01 80 / 0.035) 1px, transparent 1px);
+}
+[data-mode="dark"] .nav { background: oklch(0.188 0.012 65 / 0.80); }
+
+/* forest · dark */
+[data-mode="dark"][data-theme="forest"] {
+  --primary:      oklch(0.64 0.105 158);
+  --primary-deep: oklch(0.76 0.10 158);
+  --accent:       oklch(0.70 0.13 53);
+  --accent-deep:  oklch(0.81 0.115 55);
+  --tint:         oklch(0.64 0.105 158 / 0.14);
+  --accent-tint:  oklch(0.70 0.13 53 / 0.16);
+  --green:        oklch(0.64 0.105 158);
+}
+
+/* teal · dark (cooler neutrals) */
+[data-mode="dark"][data-theme="teal"] {
+  --paper:     oklch(0.186 0.013 250);
+  --paper-2:   oklch(0.154 0.012 250);
+  --card:      oklch(0.232 0.015 250);
+  --ink:       oklch(0.930 0.008 235);
+  --ink-soft:  oklch(0.780 0.010 235);
+  --ink-faint: oklch(0.605 0.011 235);
+  --rule:      oklch(0.930 0.008 235 / 0.16);
+  --rule-soft: oklch(0.930 0.008 235 / 0.085);
+  --primary:      oklch(0.66 0.095 218);
+  --primary-deep: oklch(0.78 0.09 216);
+  --accent:       oklch(0.73 0.105 200);
+  --accent-deep:  oklch(0.82 0.095 200);
+  --tint:         oklch(0.66 0.095 218 / 0.15);
+  --accent-tint:  oklch(0.73 0.105 200 / 0.16);
+}
+[data-mode="dark"][data-theme="teal"] .nav { background: oklch(0.186 0.013 250 / 0.80); }
+
+/* berner · dark — the black coat becomes the page */
+[data-mode="dark"][data-theme="berner"] {
+  --paper:     oklch(0.172 0.012 60);
+  --paper-2:   oklch(0.142 0.011 60);
+  --card:      oklch(0.222 0.013 62);
+  --ink:       oklch(0.940 0.013 88);
+  --ink-soft:  oklch(0.800 0.014 86);
+  --ink-faint: oklch(0.620 0.013 82);
+  --rule:      oklch(0.940 0.013 88 / 0.16);
+  --rule-soft: oklch(0.940 0.013 88 / 0.085);
+  --primary:      oklch(0.60 0.092 150);   /* grass green */
+  --primary-deep: oklch(0.72 0.092 150);
+  --accent:       oklch(0.67 0.148 50);    /* rust eyebrows */
+  --accent-deep:  oklch(0.79 0.13 52);
+  --tint:         oklch(0.60 0.092 150 / 0.14);
+  --accent-tint:  oklch(0.67 0.148 50 / 0.17);
+  --green:        oklch(0.60 0.092 150);
+}
+[data-mode="dark"][data-theme="berner"] .nav { background: oklch(0.172 0.012 60 / 0.84); }
+
+/* mode toggle button */
+.modebtn {
+  width: 34px; height: 34px; flex: none; display: grid; place-items: center;
+  font-size: 15px; line-height: 1; cursor: pointer; color: var(--ink-soft);
+  background: none; border: 1px solid var(--rule); border-radius: 8px;
+  transition: all .18s ease;
+}
+.modebtn:hover { color: var(--ink); border-color: var(--ink-faint); background: var(--card); }
+
+/* reveal-on-scroll */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}

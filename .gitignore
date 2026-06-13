@@ -1,0 +1,9 @@
+# Résumé PDF is fetched from the Bachmann1234/resume repo at deploy time
+resume.pdf
+
+# Python (resume.json -> resume.html render step)
+.venv/
+__pycache__/
+
+# OS / editor cruft
+.DS_Store
