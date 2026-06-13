@@ -6,11 +6,12 @@ name: Deploy site
 # rolling "latest" release at deploy time, so the résumé has a single source of
 # truth (github.com/Bachmann1234/resume, resume.yaml).
 #
-# Required repo secrets (Settings → Secrets and variables → Actions):
-#   CLOUDFLARE_API_TOKEN   token with "Cloudflare Pages: Edit"
-#   CLOUDFLARE_ACCOUNT_ID  your Cloudflare account ID
+# Deploys to Cloudflare Workers Static Assets (config in wrangler.toml).
 #
-# The --project-name below must match the Cloudflare Pages project you create.
+# Required repo secrets (Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN   token with "Workers Scripts: Edit" (the
+#                          "Edit Cloudflare Workers" template covers it)
+#   CLOUDFLARE_ACCOUNT_ID  your Cloudflare account ID
 
 on:
   push:
@@ -57,19 +58,11 @@ jobs:
           cp index.html resume.html dist/
           cp -r assets dist/
 
-      # Idempotent: creates the Direct Upload Pages project on the first run,
-      # harmlessly fails (and is ignored) on every run after.
-      - name: Ensure Pages project exists
-        uses: cloudflare/wrangler-action@v3
-        continue-on-error: true
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages project create portfolio --production-branch=main
-
-      - name: Deploy to Cloudflare Pages
+      # Reads wrangler.toml (name + [assets] directory). Creates the Worker on
+      # the first run, updates it after. No dashboard project setup needed.
+      - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=portfolio --branch=main
+          command: deploy

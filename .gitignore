@@ -14,3 +14,6 @@ __pycache__/
 # Deploy build output / fetched résumé artifacts
 dist/
 resume.json
+
+# Wrangler local state
+.wrangler/

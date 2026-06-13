@@ -55,8 +55,11 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
 ## Hosting
 
-Static site deployed to **Cloudflare Pages**, served from the apex
-`mattbachmann.dev` (DNS on Cloudflare). (Deploy pipeline: TODO.)
+Deployed to **Cloudflare Workers Static Assets** (config in `wrangler.toml`),
+served from the apex `mattbachmann.dev` (DNS on Cloudflare). The
+`.github/workflows/deploy.yml` Action assembles `dist/` (site + résumé PDF
+fetched from the resume release) and runs `wrangler deploy` on every push to
+`main`.
 
 ## Local preview
 

@@ -1,0 +1,8 @@
+# Cloudflare Workers Static Assets config.
+# `wrangler deploy` (run by .github/workflows/deploy.yml) uploads ./dist as a
+# static site — no Worker script needed, it's assets-only.
+name = "portfolio"
+compatibility_date = "2026-06-01"
+
+[assets]
+directory = "./dist"
