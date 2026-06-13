@@ -121,7 +121,28 @@
     });
   }
 
+  // click-to-expand: any card image opens a full, uncropped view in the lightbox
+  function lightbox() {
+    var box = document.getElementById('lightbox');
+    if (!box) return;
+    var bimg = box.querySelector('img');
+    function open(src, alt) {
+      bimg.setAttribute('src', src);
+      bimg.alt = alt || '';
+      box.hidden = false;
+    }
+    function close() { box.hidden = true; bimg.removeAttribute('src'); }
+    document.querySelectorAll('.proj__media img, .build__media img').forEach(function (img) {
+      img.addEventListener('click', function () { open(img.currentSrc || img.src, img.alt); });
+    });
+    box.addEventListener('click', close); // backdrop or close button
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !box.hidden) close();
+    });
+  }
+
+  function init() { wire(); reveals(); galleries(); lightbox(); }
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { wire(); reveals(); galleries(); });
-  } else { wire(); reveals(); galleries(); }
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
 })();
