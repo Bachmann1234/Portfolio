@@ -48,5 +48,5 @@
     - { src: builds/sit-stand-sensors.jpg, alt: "Back of the walnut timer held in hand, showing two ultrasonic sensors and a red reset button" }
   blurb: >
     Two timers that track standing-desk up and down time using a sonar sensor: a
-    gentle nudge to actually use the standing part. First time designing a custom circuit board. 
-    My wife taught me how to make the Box!
+    gentle nudge to actually use the standing part. It was my first time designing a
+    custom circuit board. My wife taught me how to make the box!
