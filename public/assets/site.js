@@ -97,11 +97,18 @@
       var track = g.querySelector('.gallery__track');
       var dots = g.querySelectorAll('.gdot');
       if (!track || dots.length < 2) return;
+      function goTo(i) {
+        i = Math.max(0, Math.min(dots.length - 1, i));
+        track.scrollTo({ left: track.clientWidth * i, behavior: 'smooth' });
+      }
+      function current() { return Math.round(track.scrollLeft / track.clientWidth); }
       dots.forEach(function (d, i) {
-        d.addEventListener('click', function () {
-          track.scrollTo({ left: track.clientWidth * i, behavior: 'smooth' });
-        });
+        d.addEventListener('click', function () { goTo(i); });
       });
+      var prev = g.querySelector('.gallery__nav--prev');
+      var next = g.querySelector('.gallery__nav--next');
+      if (prev) prev.addEventListener('click', function () { goTo(current() - 1); });
+      if (next) next.addEventListener('click', function () { goTo(current() + 1); });
       var raf;
       track.addEventListener('scroll', function () {
         if (raf) return;

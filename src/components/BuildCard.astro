@@ -20,6 +20,8 @@ const photos = b.images?.length ? b.images : b.image ? [b.image] : [];
           <img src={src} alt={`${b.name} photo ${i + 1}`} loading="lazy" />
         ))}
       </div>
+      <button class="gallery__nav gallery__nav--prev" type="button" aria-label="Previous photo">‹</button>
+      <button class="gallery__nav gallery__nav--next" type="button" aria-label="Next photo">›</button>
       <div class="gallery__dots">
         {photos.map((_, i) => (
           <button class:list={['gdot', { on: i === 0 }]} type="button" aria-label={`Photo ${i + 1}`}></button>
