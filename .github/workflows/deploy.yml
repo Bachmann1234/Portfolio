@@ -1,0 +1,65 @@
+name: Deploy site
+
+# Assembles the static site and deploys it to Cloudflare Pages.
+#
+# Résumé content/PDF are NOT stored here — they're pulled from the resume repo's
+# rolling "latest" release at deploy time, so the résumé has a single source of
+# truth (github.com/Bachmann1234/resume, resume.yaml).
+#
+# Required repo secrets (Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN   token with "Cloudflare Pages: Edit"
+#   CLOUDFLARE_ACCOUNT_ID  your Cloudflare account ID
+#
+# The --project-name below must match the Cloudflare Pages project you create.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  # Lets the resume repo trigger a redeploy when the résumé changes (optional;
+  # needs a cross-repo dispatch step on that side). Safe to leave in place.
+  repository_dispatch:
+    types: [resume-updated]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Fetch résumé artifacts from the resume repo
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          base=https://github.com/Bachmann1234/resume/releases/download/latest
+          curl -fsSL -o resume.json   "$base/resume.json"
+          curl -fsSL -o dist/resume.pdf "$base/cv.pdf"
+
+      - name: Render resume.html from resume.json
+        run: python build_resume.py resume.json
+
+      - name: Assemble site into dist/
+        run: |
+          cp index.html resume.html dist/
+          cp -r assets dist/
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=portfolio --branch=main

@@ -10,3 +10,7 @@ __pycache__/
 
 # Playwright MCP scratch output
 .playwright-mcp/
+
+# Deploy build output / fetched résumé artifacts
+dist/
+resume.json
