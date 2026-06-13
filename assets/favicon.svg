@@ -1,12 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="B">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#286642"/>
-      <stop offset="1" stop-color="#0f4629"/>
-    </linearGradient>
-  </defs>
-  <rect width="32" height="32" rx="7" fill="url(#g)"/>
+  <rect width="32" height="32" rx="7" fill="#4e9f73"/>
   <text x="16" y="22.6" text-anchor="middle"
         font-family="ui-rounded, 'SF Pro Rounded', 'Varela Round', system-ui, sans-serif"
-        font-weight="600" font-size="19" fill="#f8f6ee">B</text>
+        font-weight="600" font-size="19" fill="#faf8f1">B</text>
 </svg>
