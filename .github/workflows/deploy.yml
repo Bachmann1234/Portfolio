@@ -57,6 +57,16 @@ jobs:
           cp index.html resume.html dist/
           cp -r assets dist/
 
+      # Idempotent: creates the Direct Upload Pages project on the first run,
+      # harmlessly fails (and is ignored) on every run after.
+      - name: Ensure Pages project exists
+        uses: cloudflare/wrangler-action@v3
+        continue-on-error: true
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages project create portfolio --production-branch=main
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
