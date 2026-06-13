@@ -19,7 +19,7 @@ const photos = b.images?.length ? b.images : b.image ? [b.image] : [];
     <div class="build__media build__gallery" data-gallery>
       <div class="gallery__track">
         {photos.map((src, i) => (
-          <Image src={cardImage(src)} alt={`${b.name} photo ${i + 1}`} />
+          <Image src={cardImage(src)} alt={`${b.name}, view ${i + 1}`} />
         ))}
       </div>
       <button class="gallery__nav gallery__nav--prev" type="button" aria-label="Previous photo">‹</button>
@@ -31,7 +31,7 @@ const photos = b.images?.length ? b.images : b.image ? [b.image] : [];
       </div>
     </div>
   ) : photos.length === 1 ? (
-    <div class="build__media"><Image src={cardImage(photos[0])} alt={`${b.name} build photo`} /></div>
+    <div class="build__media"><Image src={cardImage(photos[0])} alt={b.name} /></div>
   ) : (
     <div class="build__media build__media--empty"><span>{b.placeholder ?? 'Photo coming soon'}</span></div>
   )}
