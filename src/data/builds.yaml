@@ -13,8 +13,19 @@
     A custom kitchen scale for the home bar. It measures cocktail ingredients by
     weight so every drink comes out balanced.
 
-- id: eink-art-display
+- id: tetris-controller
   order: 3
+  name: Tetris Controller
+  tags: [RP2040, CircuitPython, 3D print, USB HID]
+  image: /assets/images/builds/tetris-controller.jpg
+  blurb: >
+    A split Tetris controller built on a Raspberry Pi Pico running CircuitPython.
+    It presents itself as a plain USB keyboard, so it works with any Tetris game
+    (TETR.IO, Tetris Effect, Jstris) with no remapping. Eight direct-wired buttons
+    across two 3D-printed halves, joined by a GX16 cable.
+
+- id: eink-art-display
+  order: 4
   name: E-ink Art Display
   tags: [Raspberry Pi, e-ink, Python]
   image: /assets/images/builds/eink-art-display.jpg
@@ -36,7 +47,7 @@
     gentle nudge to actually use the standing part.
 
 - id: usb-morse-key
-  order: 4
+  order: 5
   name: USB Morse Code Key
   tags: [HID, Android, retro]
   image: /assets/images/builds/usb-morse-key.jpg
