@@ -1,7 +1,8 @@
 # Hardware builds from the Electronics-Drawer repo. `order` sets display order
-# (and the 01..NN index shown on the card). `image:` points at a photo in
-# /assets/images/builds/; drop the `placeholder:` field instead to show an empty
-# slot for a build that has no photo yet.
+# (and the 01..NN index shown on the card). For photos, either:
+#   image:  /assets/images/builds/foo.jpg          (single)
+#   images: [ /assets/images/builds/a.jpg, ... ]   (swipeable gallery)
+# Omit both and add `placeholder:` to show an empty slot.
 
 - id: cocktail-scale
   order: 1
@@ -12,17 +13,8 @@
     A custom kitchen scale for the home bar. It measures cocktail ingredients by
     weight so every drink comes out balanced.
 
-- id: giant-button
-  order: 2
-  name: Giant Button
-  tags: [HID, QMK, mechanical]
-  image: /assets/images/builds/giant-button.jpg
-  blurb: >
-    An oversized keyboard switch, programmable to fire any keystroke or macro.
-    Equal parts useful shortcut and desk toy.
-
 - id: eink-art-display
-  order: 3
+  order: 2
   name: E-ink Art Display
   tags: [Raspberry Pi, e-ink, Python]
   image: /assets/images/builds/eink-art-display.jpg
@@ -31,7 +23,7 @@
     internet: a quiet, paper-like picture that changes on its own.
 
 - id: sit-stand-timer
-  order: 4
+  order: 3
   name: Sit / Stand Timer
   tags: [ultrasonic, microcontroller]
   image: /assets/images/builds/sit-stand-timer.jpg
@@ -40,7 +32,7 @@
     gentle nudge to actually use the standing part.
 
 - id: usb-morse-key
-  order: 5
+  order: 4
   name: USB Morse Code Key
   tags: [HID, Android, retro]
   image: /assets/images/builds/usb-morse-key.jpg

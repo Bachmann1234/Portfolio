@@ -37,7 +37,8 @@ const builds = defineCollection({
     order: z.number(),
     name: z.string(),
     tags: z.array(z.string()).default([]),
-    image: z.string().optional(),
+    image: z.string().optional(), // single photo
+    images: z.array(z.string()).optional(), // multiple -> swipeable gallery
     placeholder: z.string().optional(),
     blurb: z.string(),
   }),

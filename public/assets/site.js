@@ -89,7 +89,32 @@
     els.forEach(function (e) { io.observe(e); });
   }
 
+  // multi-photo build galleries: progressive enhancement over CSS scroll-snap.
+  // Dots become clickable and track the scroll position. Swipe/scroll works
+  // even if this never runs.
+  function galleries() {
+    document.querySelectorAll('[data-gallery]').forEach(function (g) {
+      var track = g.querySelector('.gallery__track');
+      var dots = g.querySelectorAll('.gdot');
+      if (!track || dots.length < 2) return;
+      dots.forEach(function (d, i) {
+        d.addEventListener('click', function () {
+          track.scrollTo({ left: track.clientWidth * i, behavior: 'smooth' });
+        });
+      });
+      var raf;
+      track.addEventListener('scroll', function () {
+        if (raf) return;
+        raf = requestAnimationFrame(function () {
+          raf = null;
+          var i = Math.round(track.scrollLeft / track.clientWidth);
+          dots.forEach(function (d, j) { d.classList.toggle('on', j === i); });
+        });
+      }, { passive: true });
+    });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { wire(); reveals(); });
-  } else { wire(); reveals(); }
+    document.addEventListener('DOMContentLoaded', function () { wire(); reveals(); galleries(); });
+  } else { wire(); reveals(); galleries(); }
 })();

@@ -8,10 +8,26 @@ interface Props {
 }
 const { build: b, index, eager } = Astro.props;
 const idx = String(index).padStart(2, '0');
+
+// Normalize to a list: `images` wins, else single `image`, else none.
+const photos = b.images?.length ? b.images : b.image ? [b.image] : [];
 ---
 <article class:list={['card', 'build', 'reveal', { in: eager }]}>
-  {b.image ? (
-    <div class="build__media"><img src={b.image} alt={`${b.name} build photo`} /></div>
+  {photos.length > 1 ? (
+    <div class="build__media build__gallery" data-gallery>
+      <div class="gallery__track">
+        {photos.map((src, i) => (
+          <img src={src} alt={`${b.name} photo ${i + 1}`} loading="lazy" />
+        ))}
+      </div>
+      <div class="gallery__dots">
+        {photos.map((_, i) => (
+          <button class:list={['gdot', { on: i === 0 }]} type="button" aria-label={`Photo ${i + 1}`}></button>
+        ))}
+      </div>
+    </div>
+  ) : photos.length === 1 ? (
+    <div class="build__media"><img src={photos[0]} alt={`${b.name} build photo`} /></div>
   ) : (
     <div class="build__media build__media--empty"><span>{b.placeholder ?? 'Photo coming soon'}</span></div>
   )}

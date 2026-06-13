@@ -34,6 +34,16 @@ const builds = (await getCollection('builds')).sort(
   .build__media img { width: 100%; height: 100%; object-fit: cover; }
   .build__media--empty { display: grid; place-items: center; background: var(--tint); }
   .build__media--empty span { font-family: var(--font-mono); font-size: 13px; color: var(--ink-faint); }
+
+  /* swipeable multi-photo gallery (CSS scroll-snap; dots enhanced by site.js) */
+  .build__gallery { position: relative; }
+  .gallery__track { display: flex; height: 240px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .gallery__track::-webkit-scrollbar { display: none; }
+  .gallery__track img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; scroll-snap-align: center; }
+  .gallery__dots { position: absolute; bottom: 11px; left: 0; right: 0; display: flex; gap: 7px; justify-content: center; pointer-events: none; }
+  .gdot { width: 7px; height: 7px; padding: 0; border: none; border-radius: 50%; cursor: pointer; pointer-events: auto; background: rgba(255,255,255,.45); box-shadow: 0 0 0 1px rgba(0,0,0,.3); transition: background .2s ease; }
+  .gdot.on { background: #fff; }
+
   .build__body { padding: 24px 28px 26px; display: flex; flex-direction: column; flex: 1; }
   .build__top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
   .build h3 { font-size: 25px; letter-spacing: -0.02em; margin-bottom: 8px; }
