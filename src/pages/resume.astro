@@ -1,0 +1,170 @@
+---
+import fs from 'node:fs';
+import Base from '../layouts/Base.astro';
+
+// Résumé CONTENT is single-sourced from the Bachmann1234/resume repo
+// (resume.yaml -> resume.json). It is fetched at build time, NOT stored here.
+// CI curls resume.json to the project root before `astro build`; for local dev
+// we fall back to the sibling resume checkout.
+interface Resume {
+  name: { first: string; last: string; full: string };
+  tagline: string;
+  summary: string;
+  social: { address: string; github: string; linkedin: string };
+  skills: { category: string; items: string[] }[];
+  education: { institution: string; degree: string; field: string; year: string | number }[];
+  experience: { title: string; company: string; note?: string; dates: string; highlights: string[] }[];
+  talks: { venue: string; title: string; description: string }[];
+}
+
+function loadResume(): Resume {
+  const candidates = ['resume.json', '../resume/build/resume.json'];
+  for (const p of candidates) {
+    try {
+      return JSON.parse(fs.readFileSync(p, 'utf-8'));
+    } catch {
+      /* try next */
+    }
+  }
+  throw new Error(
+    'resume.json not found. Fetch it from the resume repo release, or build it ' +
+      'in the sibling resume checkout (../resume).',
+  );
+}
+
+const r = loadResume();
+---
+<Base title="Résumé — Matt Bachmann" active="resume">
+  <main class="wrap">
+    <header class="phead">
+      <div class="rhead">
+        <div>
+          <span class="kicker">Résumé</span>
+          <h1>Matt Bachmann</h1>
+          <p class="lede">{r.tagline}</p>
+        </div>
+        <a class="btn btn--primary" href="/resume.pdf">Download PDF <span class="arr">↓</span></a>
+      </div>
+    </header>
+
+    <p class="note reveal in resume-summary">{r.summary}</p>
+
+    <div class="rgrid">
+      <aside class="side reveal in">
+        <div class="panel">
+          <h4>Contact</h4>
+          <ul class="contactlist">
+            <li><span class="k">Loc</span><span>{r.social.address}</span></li>
+            <li><span class="k">GitHub</span><a href={`https://github.com/${r.social.github}`}>github.com/{r.social.github}</a></li>
+            <li><span class="k">LinkedIn</span><a href={`https://www.linkedin.com/in/${r.social.linkedin}`}>in/{r.social.linkedin}</a></li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h4>Skills</h4>
+          {r.skills.map((group) => (
+            <div class="skillgroup">
+              <span>{group.category}</span>
+              <div class="tags">
+                {group.items.map((item) => (
+                  <span class:list={['tag', { 'tag--lang': group.category === 'Languages' }]}>{item}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="panel edu">
+          <h4>Education</h4>
+          {r.education.map((e) => (
+            <div class="eduentry">
+              <b>{e.institution}</b>
+              <span>{e.degree} · {e.field}</span>
+              <time>{e.year}</time>
+            </div>
+          ))}
+        </div>
+      </aside>
+
+      <div>
+        <section class="secblock reveal">
+          <span class="kicker">Experience</span>
+          {r.experience.map((job) => (
+            <div class="role">
+              <div class="role__head">
+                <div>
+                  <h3>{job.title}</h3>
+                  <span class="co">{job.company}{job.note ? ` (${job.note})` : ''}</span>
+                </div>
+                <time>{job.dates}</time>
+              </div>
+              <ul>
+                {job.highlights.map((h) => <li>{h}</li>)}
+              </ul>
+            </div>
+          ))}
+        </section>
+
+        <section class="secblock reveal">
+          <span class="kicker">Highlighted Talks</span>
+          {r.talks.map((t) => (
+            <div class="talk">
+              <span class="venue">{t.venue}</span>
+              <div>
+                <b>{t.title}</b>
+                <p>{t.description}</p>
+              </div>
+            </div>
+          ))}
+        </section>
+      </div>
+    </div>
+  </main>
+</Base>
+
+<style is:global>
+  .rgrid { display: grid; grid-template-columns: 300px 1fr; gap: clamp(28px, 5vw, 60px); align-items: start; padding-bottom: 20px; }
+  .side { position: sticky; top: 86px; display: flex; flex-direction: column; gap: 26px; }
+  @media (max-width: 820px){ .rgrid { grid-template-columns: 1fr; } .side { position: static; } }
+
+  .resume-summary { background: var(--accent-tint); border: 1px solid var(--rule-soft); border-radius: 12px; padding: 16px 20px; margin: 0 0 30px; font-size: 16.5px; color: var(--ink-soft); line-height: 1.6; }
+
+  .panel { background: var(--card); border: 1px solid var(--rule-soft); border-radius: 14px; box-shadow: var(--shadow); padding: 22px 24px; }
+  .panel h4 { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-deep); margin-bottom: 14px; }
+  .contactlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .contactlist li { display: flex; gap: 10px; font-size: 15.5px; color: var(--ink-soft); align-items: baseline; }
+  .contactlist .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); flex: none; width: 58px; }
+  .contactlist a { color: var(--primary-deep); text-decoration: none; }
+  [data-theme="berner"] .contactlist a { color: var(--accent-deep); }
+  .contactlist a:hover { text-decoration: underline; }
+
+  .skillgroup { margin-bottom: 16px; }
+  .skillgroup:last-child { margin-bottom: 0; }
+  .skillgroup > span { font-family: var(--font-display); font-size: 15px; color: var(--ink); display: block; margin-bottom: 8px; font-weight: 600; }
+
+  .edu b { font-family: var(--font-display); font-size: 16px; display: block; }
+  .edu span { font-size: 14.5px; color: var(--ink-soft); display: block; }
+  .edu time { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); }
+  .edu .eduentry { margin-bottom: 16px; }
+  .edu .eduentry:last-child { margin-bottom: 0; }
+
+  .secblock { margin-bottom: 44px; }
+  .secblock > .kicker { margin-bottom: 22px; }
+  .role { position: relative; padding: 0 0 28px 30px; border-left: 2px solid var(--rule); }
+  .role:last-child { padding-bottom: 0; }
+  .role::before { content: ""; position: absolute; left: -7px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 0 4px var(--paper); }
+  [data-theme="berner"] .role::before { background: var(--accent); }
+  .role__head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; }
+  .role h3 { font-size: 22px; letter-spacing: -0.01em; }
+  .role .co { font-family: var(--font-display); font-size: 17px; color: var(--accent-deep); font-style: italic; }
+  .role time { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); letter-spacing: 0.03em; white-space: nowrap; }
+  .role ul { margin: 12px 0 0; padding-left: 18px; color: var(--ink-soft); font-size: 16.5px; }
+  .role ul li { margin-bottom: 7px; }
+
+  .talk { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--rule-soft); }
+  .talk:last-child { border-bottom: none; }
+  .talk .venue { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); flex: none; width: 132px; padding-top: 3px; }
+  .talk b { font-family: var(--font-display); font-size: 17.5px; font-weight: 600; display: block; }
+  .talk p { font-size: 15px; color: var(--ink-soft); margin: 5px 0 0; }
+  .rhead { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px; }
+</style>

@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Matt Bachmann — Software & Hardware" active="home">
+  <main>
+    <section class="hero wrap">
+      <div class="hero__grid">
+        <div class="reveal in">
+          <span class="kicker">Software engineer · Maker · Medford, MA</span>
+          <h1>I build <em>tools</em><br />and tinker with <em>things</em>.</h1>
+          <p class="lede">
+            Software by trade, hardware by curiosity. I like making the kind of
+            small, sturdy tools that quietly make a day better, in code and on
+            the workbench.
+          </p>
+          <div class="cta">
+            <a class="btn btn--primary" href="/software">See the work <span class="arr">→</span></a>
+            <a class="btn btn--ghost" href="/resume">Read résumé</a>
+          </div>
+        </div>
+        <aside class="hero__aside reveal in">
+          <div class="nowcard">
+            <h3>// currently</h3>
+            <ul>
+              <li><span class="dot dot--g"></span><span>Maintaining <b>diff_cover</b>, an open-source test-coverage tool used across the Python world.</span></li>
+              <li><span class="dot"></span><span>Filling the <b>electronics drawer</b> with half-finished gadgets and the occasional finished one.</span></li>
+              <li><span class="dot dot--g"></span><span>Taking long walks with a very good <b>Bernese mountain dog</b>.</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="about reveal">
+        <div class="about__photo">
+          <img src="/assets/bernese.jpg" alt="My Bernese mountain dog lying in the grass" />
+          <div class="about__badge"><b>The co-pilot</b>chief morale officer</div>
+        </div>
+        <div>
+          <span class="kicker">Off the clock</span>
+          <h2>A little about me</h2>
+          <p>When I'm not at a keyboard or a soldering iron, I'm usually out with my Bernese mountain dog, the unofficial inspiration for half the colors on this site (and most of the dog hair on my projects).</p>
+          <p>I care about craft: code that's kind to the next person who reads it, and objects that feel good to use. This site is a place to keep the things I've made and the notes that go with them.</p>
+          <div class="cta" style="margin-top:8px">
+            <a class="tlink" href="https://github.com/Bachmann1234">github.com/Bachmann1234</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style is:global>
+  .hero { padding: clamp(56px, 10vw, 120px) 0 clamp(40px, 7vw, 80px); position: relative; }
+  .hero__grid { display: grid; grid-template-columns: 1.4fr 0.9fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
+  .hero h1 { font-size: clamp(52px, 9vw, 104px); line-height: 0.96; letter-spacing: -0.03em; margin: 22px 0 0; }
+  .hero h1 em { font-style: italic; color: var(--accent-deep); }
+  .hero .lede { font-size: clamp(20px, 2.5vw, 25px); color: var(--ink-soft); max-width: 46ch; margin: 26px 0 30px; }
+  .hero .cta { display: flex; flex-wrap: wrap; gap: 14px; }
+  .hero__aside { display: flex; flex-direction: column; gap: 16px; }
+  .nowcard { background: var(--card); border: 1px solid var(--rule-soft); border-radius: 16px; box-shadow: var(--shadow); padding: 24px 26px; }
+  .nowcard h3 { font-size: 15px; font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.04em; color: var(--ink); margin-bottom: 12px; text-transform: none; }
+  .nowcard ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .nowcard li { display: flex; gap: 11px; font-size: 16px; line-height: 1.45; color: var(--ink-soft); }
+  .nowcard li b { color: var(--ink); font-weight: 600; font-family: var(--font-display); }
+  .dot { flex: none; width: 8px; height: 8px; border-radius: 50%; margin-top: 8px; background: var(--accent); }
+  .dot--g { background: var(--primary); }
+
+  .about { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(28px,5vw,56px); align-items: center; margin-top: clamp(56px,8vw,104px); }
+  .about__photo { position: relative; }
+  .about__photo img { width: 100%; height: clamp(360px, 46vw, 540px); object-fit: cover; border-radius: 20px; box-shadow: var(--shadow-lg); }
+  .about__badge { position: absolute; left: -14px; bottom: 22px; background: var(--card); border: 1px solid var(--rule-soft); border-radius: 12px; box-shadow: var(--shadow); padding: 12px 16px; font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-soft); }
+  .about__badge b { color: var(--ink); font-family: var(--font-display); font-size: 15px; display: block; }
+  .about h2 { font-size: clamp(30px, 4.5vw, 46px); margin-bottom: 18px; }
+  .about p { color: var(--ink-soft); font-size: 18px; max-width: 50ch; }
+
+  @media (max-width: 860px) {
+    .hero__grid { grid-template-columns: 1fr; }
+    .about { grid-template-columns: 1fr; }
+    .about__photo { order: -1; }
+  }
+</style>

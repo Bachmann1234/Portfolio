@@ -1,0 +1,67 @@
+name: Deploy site
+
+# Builds the Astro site and deploys it to Cloudflare Workers Static Assets.
+#
+# Résumé content/PDF are NOT stored here — they're pulled from the resume repo's
+# rolling "latest" release at build time, so the résumé has a single source of
+# truth (github.com/Bachmann1234/resume, resume.yaml). resume.astro reads the
+# fetched resume.json; the PDF is dropped into public/ so /resume.pdf works.
+#
+# Deploy target (./dist) is configured in wrangler.toml.
+#
+# Required repo secrets (Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN   token with "Workers Scripts: Edit"
+#   CLOUDFLARE_ACCOUNT_ID  your Cloudflare account ID
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  # Lets the resume repo trigger a redeploy when the résumé changes.
+  repository_dispatch:
+    types: [resume-updated]
+
+permissions:
+  contents: read
+
+# Run JS actions on Node 24 (Node 20 is deprecated on GitHub runners).
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch résumé artifacts from the resume repo
+        run: |
+          set -euo pipefail
+          base=https://github.com/Bachmann1234/resume/releases/download/latest
+          curl -fsSL -o resume.json "$base/resume.json"
+          mkdir -p public
+          curl -fsSL -o public/resume.pdf "$base/cv.pdf"
+
+      - name: Build site
+        run: npm run build
+
+      # Reads wrangler.toml (name + [assets] directory = ./dist). Creates the
+      # Worker on the first run, updates it after.
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy

@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import BuildCard from '../components/BuildCard.astro';
+
+const builds = (await getCollection('builds')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+<Base title="Hardware — Matt Bachmann" active="hardware">
+  <main class="wrap">
+    <header class="phead">
+      <span class="kicker">02 / Workbench</span>
+      <h1>Hardware</h1>
+      <p class="lede">
+        The electronics drawer: microcontroller builds that solve small, real
+        problems around the house (and a few just because). All from my
+        <a class="tlink" href="https://github.com/Bachmann1234/Electronics-Drawer">Electronics-Drawer</a> repo.
+      </p>
+    </header>
+
+    <div class="grid">
+      {builds.map((entry, i) => (
+        <BuildCard build={entry.data} index={i + 1} eager={i < 2} />
+      ))}
+    </div>
+  </main>
+</Base>
+
+<style is:global>
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .build { padding: 0; }
+  .build__media { height: 240px; overflow: hidden; border-bottom: 1px solid var(--rule-soft); }
+  .build__media img { width: 100%; height: 100%; object-fit: cover; }
+  .build__media--empty { display: grid; place-items: center; background: var(--tint); }
+  .build__media--empty span { font-family: var(--font-mono); font-size: 13px; color: var(--ink-faint); }
+  .build__body { padding: 24px 28px 26px; display: flex; flex-direction: column; flex: 1; }
+  .build__top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .build h3 { font-size: 25px; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .build .idx { font-family: var(--font-mono); font-size: 12px; color: var(--ink-faint); letter-spacing: 0.1em; }
+  .build p { color: var(--ink-soft); font-size: 16px; margin: 0 0 16px; }
+  .build .tags { margin-top: auto; }
+  @media (max-width: 760px){ .grid { grid-template-columns: 1fr; } }
+</style>

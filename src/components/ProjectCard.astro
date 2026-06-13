@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>['data'];
+  eager?: boolean; // first couple of cards reveal immediately (above the fold)
+}
+const { project: p, eager } = Astro.props;
+---
+<article class:list={['card', 'proj', 'reveal', { in: eager }]}>
+  {p.image && (
+    <div class="proj__media"><img src={p.image} alt={`${p.name} screenshot`} /></div>
+  )}
+  <div class="proj__top">
+    <div class="tags">
+      <span class="tag tag--lang">{p.lang}</span>
+      {p.tags.map((t) => <span class="tag">{t}</span>)}
+    </div>
+    {p.stars !== undefined ? (
+      <span class="proj__stars">★ {p.stars}</span>
+    ) : p.status ? (
+      <span class:list={['status', `status--${p.status.kind}`]}>{p.status.label}</span>
+    ) : null}
+  </div>
+  <h3>{p.name}</h3>
+  <p>{p.blurb}</p>
+  {p.credit && <p class="proj__credit">{p.credit}</p>}
+  <div class="proj__foot">
+    <div class="proj__links">
+      {p.links.map((l) => <a class="tlink" href={l.url}>{l.label}</a>)}
+    </div>
+  </div>
+</article>

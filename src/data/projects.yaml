@@ -1,0 +1,96 @@
+# Running project list — Astro content collection (validated by src/content.config.ts).
+# Each entry needs a unique `id`. `order` controls display order on the page.
+# To add a project: append an entry. The build validates it.
+
+- id: diff_cover
+  order: 1
+  name: diff_cover
+  lang: Python
+  tags: [pytest, CI]
+  stars: 838
+  image: /assets/projects/diffcover.png
+  credit: >
+    Originally created by Will Daly (diff-cover) and Sarina Canelake
+    (diff-quality) with support from edX. I maintain it today.
+  blurb: >
+    Finds the lines a diff changed that still lack test coverage, so review and
+    CI can focus on what is new instead of the whole codebase. It has become a
+    common fixture in Python CI pipelines, and I have put a lot of work into it
+    over the years as its maintainer.
+  links:
+    - { label: "Repo →", url: "https://github.com/Bachmann1234/diff_cover" }
+
+- id: howhotistheshop
+  order: 2
+  name: HowHotIsTheShop
+  lang: Python
+  tags: [web, IoT]
+  image: /assets/projects/howhotistheshop.png
+  blurb: >
+    A small web page that reports the live temperature inside my wife's woodshop,
+    so she can tell whether the glue will set and the finish will cure before she
+    walks out there. There was no public API for the sensor, so I snooped the
+    official app's calls and reverse engineered one. Tiny, sturdy, and used most
+    days.
+  links:
+    - { label: "Live →", url: "https://howhotistheshop.com/" }
+    - { label: "Repo →", url: "https://github.com/Bachmann1234/HowHotIsTheShop" }
+
+- id: smartcontrol
+  order: 3
+  name: SmartControl
+  lang: Swift
+  tags: [macOS, Bluetooth, reverse-engineering]
+  image: /assets/projects/smartcontrol.png
+  blurb: >
+    A native macOS menu bar app for my Sennheiser MOMENTUM 4 headphones: battery,
+    noise control, equalizer, and multipoint, with no Electron in sight. Building
+    it meant reverse engineering the headphones' GAIA Bluetooth protocol over
+    RFCOMM to add multipoint, the equalizer commands, and live push updates.
+  credit: >
+    Built on zaval/sennheiser-desktop-client, which first reverse engineered the
+    GAIA v3 command schema.
+  links:
+    - { label: "Repo →", url: "https://github.com/Bachmann1234/smartcontrol-mac" }
+
+- id: huecontrol
+  order: 4
+  name: hueControl
+  lang: Swift
+  tags: [macOS, SwiftUI]
+  image: /assets/projects/huecontrol.png
+  blurb: >
+    A macOS menu bar app for Philips Hue lights, written in SwiftUI. Flip rooms
+    on and off, jump between scenes, and tune color and brightness from the menu
+    bar without opening the official app.
+  links:
+    - { label: "Repo →", url: "https://github.com/Bachmann1234/hueControl" }
+
+- id: scoundroid
+  order: 5
+  name: Scoundroid
+  lang: Kotlin
+  tags: [Android, Jetpack Compose]
+  status: { label: "Google Play", kind: "live" }
+  image: /assets/projects/scoundroid.png
+  blurb: >
+    An Android build of Scoundrel, the single-deck rogue-like card game, written
+    in Kotlin and Jetpack Compose and shipped on the Google Play Store. Original
+    game design by Zach Gage and Kurt Bieg.
+  links:
+    - { label: "Google Play →", url: "https://play.google.com/store/apps/details?id=dev.mattbachmann.scoundroid" }
+    - { label: "Repo →", url: "https://github.com/Bachmann1234/scoundroid" }
+
+- id: macourtreporter
+  order: 6
+  name: MACourtReporter
+  lang: TypeScript
+  tags: [civic data]
+  status: { label: "Retired", kind: "retired" }
+  image: /assets/projects/macourtreporter.png
+  blurb: >
+    Tracked and reported on the activities of the Massachusetts legislature.
+    Retired now, but a fun experiment in turning dry civic data into something a
+    person would actually read.
+  links:
+    - { label: "Repo →", url: "https://github.com/Bachmann1234/MACourtReporter" }
