@@ -6,7 +6,6 @@ import Base from '../layouts/Base.astro';
     <section class="hero wrap">
       <div class="hero__grid">
         <div class="reveal in">
-          <img class="avatar" src="/assets/images/matt.jpg" alt="Matt Bachmann" width="84" height="84" />
           <span class="kicker">Software engineer · Maker · Medford, MA</span>
           <h1>I build <em>tools</em><br />and tinker with <em>things</em>.</h1>
           <p class="lede">
@@ -20,6 +19,7 @@ import Base from '../layouts/Base.astro';
           </div>
         </div>
         <aside class="hero__aside reveal in">
+          <img class="avatar" src="/assets/images/matt.jpg" alt="Matt Bachmann" width="132" height="132" />
           <div class="nowcard">
             <h3>// currently</h3>
             <ul>
@@ -55,7 +55,7 @@ import Base from '../layouts/Base.astro';
 
 <style is:global>
   .hero { padding: clamp(56px, 10vw, 120px) 0 clamp(40px, 7vw, 80px); position: relative; }
-  .avatar { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; display: block; border: 2px solid var(--rule); box-shadow: var(--shadow); margin-bottom: 22px; }
+  .avatar { width: 132px; height: 132px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--rule); box-shadow: var(--shadow-lg); }
   .hero__grid { display: grid; grid-template-columns: 1.4fr 0.9fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
   .hero h1 { font-size: clamp(52px, 9vw, 104px); line-height: 0.96; letter-spacing: -0.03em; margin: 22px 0 0; }
   .hero h1 em { font-style: italic; color: var(--accent-deep); }
