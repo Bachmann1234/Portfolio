@@ -54,7 +54,9 @@ import Base from '../layouts/Base.astro';
 </Base>
 
 <style is:global>
-  .hero { padding: clamp(56px, 10vw, 120px) 0 clamp(40px, 7vw, 80px); position: relative; }
+  /* vertical only — let .wrap own the horizontal gutter (a `padding` shorthand
+     here would zero out .wrap's padding-inline and kill the side margin) */
+  .hero { padding-block: clamp(56px, 10vw, 120px) clamp(40px, 7vw, 80px); position: relative; }
   .avatar { width: 132px; height: 132px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--rule); box-shadow: var(--shadow-lg); }
   .hero__grid { display: grid; grid-template-columns: 1.4fr 0.9fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
   .hero h1 { font-size: clamp(52px, 9vw, 104px); line-height: 0.96; letter-spacing: -0.03em; margin: 22px 0 0; }
