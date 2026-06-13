@@ -1,5 +1,7 @@
 # Running project list — Astro content collection (validated by src/content.config.ts).
 # Each entry needs a unique `id`. `order` controls display order on the page.
+# `image` is a path under src/assets/ (e.g. projects/foo.png), resolved +
+# optimized to webp via src/lib/images.ts + Astro <Image>.
 # To add a project: append an entry. The build validates it.
 
 - id: diff_cover
@@ -8,7 +10,7 @@
   lang: Python
   tags: [pytest, CI]
   stars: 838
-  image: /assets/images/projects/diffcover.png
+  image: projects/diffcover.png
   credit: >
     Originally created by Will Daly (diff-cover) and Sarina Canelake
     (diff-quality) with support from edX. I maintain it today.
@@ -25,7 +27,7 @@
   name: HowHotIsTheShop
   lang: Python
   tags: [web, IoT]
-  image: /assets/images/projects/howhotistheshop.png
+  image: projects/howhotistheshop.png
   blurb: >
     A small web page that reports the live temperature inside my wife's woodshop,
     so she can tell whether the glue will set and the finish will cure before she
@@ -41,7 +43,7 @@
   name: SmartControl
   lang: Swift
   tags: [macOS, Bluetooth, reverse-engineering]
-  image: /assets/images/projects/smartcontrol.png
+  image: projects/smartcontrol.png
   blurb: >
     A native macOS menu bar app for my Sennheiser MOMENTUM 4 headphones: battery,
     noise control, equalizer, and multipoint, with no Electron in sight. Building
@@ -58,7 +60,7 @@
   name: hueControl
   lang: Swift
   tags: [macOS, SwiftUI]
-  image: /assets/images/projects/huecontrol.png
+  image: projects/huecontrol.png
   blurb: >
     A macOS menu bar app for Philips Hue lights, written in SwiftUI. Flip rooms
     on and off, jump between scenes, and tune color and brightness from the menu
@@ -72,7 +74,7 @@
   lang: Kotlin
   tags: [Android, Jetpack Compose]
   status: { label: "Google Play", kind: "live" }
-  image: /assets/images/projects/scoundroid.png
+  image: projects/scoundroid.png
   blurb: >
     An Android build of Scoundrel, the single-deck rogue-like card game, written
     in Kotlin and Jetpack Compose and shipped on the Google Play Store. Original
@@ -87,7 +89,7 @@
   lang: TypeScript
   tags: [civic data]
   status: { label: "Retired", kind: "retired" }
-  image: /assets/images/projects/macourtreporter.png
+  image: projects/macourtreporter.png
   blurb: >
     Tracked and reported on the activities of the Massachusetts legislature.
     Retired now, but a fun experiment in turning dry civic data into something a

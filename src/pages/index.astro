@@ -1,5 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import matt from '../assets/matt.jpg';
+import bernese from '../assets/bernese.jpg';
 ---
 <Base title="Matt Bachmann — Software & Hardware" active="home">
   <main>
@@ -19,7 +22,7 @@ import Base from '../layouts/Base.astro';
           </div>
         </div>
         <aside class="hero__aside reveal in">
-          <img class="avatar" src="/assets/images/matt.jpg" alt="Matt Bachmann" width="132" height="132" />
+          <Image class="avatar" src={matt} alt="Matt Bachmann" width={264} loading="eager" />
           <div class="nowcard">
             <h3>// currently</h3>
             <ul>
@@ -35,7 +38,7 @@ import Base from '../layouts/Base.astro';
     <section class="wrap">
       <div class="about reveal">
         <div class="about__photo">
-          <img src="/assets/images/bernese.jpg" alt="My Bernese mountain dog lying in the grass" />
+          <Image src={bernese} alt="My Bernese mountain dog lying in the grass" width={1000} />
           <div class="about__badge"><b>The co-pilot</b>chief morale officer</div>
         </div>
         <div>

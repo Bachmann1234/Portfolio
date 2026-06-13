@@ -1,14 +1,15 @@
 # Hardware builds from the Electronics-Drawer repo. `order` sets display order
-# (and the 01..NN index shown on the card). For photos, either:
-#   image:  /assets/images/builds/foo.jpg          (single)
-#   images: [ /assets/images/builds/a.jpg, ... ]   (swipeable gallery)
+# (and the 01..NN index shown on the card). Photo paths are relative to
+# src/assets/ (resolved + optimized via src/lib/images.ts + Astro <Image>). Either:
+#   image:  builds/foo.jpg              (single)
+#   images: [ builds/a.jpg, ... ]       (swipeable gallery)
 # Omit both and add `placeholder:` to show an empty slot.
 
 - id: cocktail-scale
   order: 2
   name: Cocktail Scale
   tags: [load cell, microcontroller, 3D print]
-  image: /assets/images/builds/cocktail-scale.jpg
+  image: builds/cocktail-scale.jpg
   blurb: >
     A custom kitchen scale for the home bar. It measures cocktail ingredients by
     weight so every drink comes out balanced.
@@ -17,7 +18,7 @@
   order: 3
   name: Tetris Controller
   tags: [RP2040, CircuitPython, 3D print, USB HID]
-  image: /assets/images/builds/tetris-controller.jpg
+  image: builds/tetris-controller.jpg
   blurb: >
     A split Tetris controller built on a Raspberry Pi Pico running CircuitPython.
     It presents itself as a plain USB keyboard, so it works with any Tetris game
@@ -28,7 +29,7 @@
   order: 4
   name: E-ink Art Display
   tags: [Raspberry Pi, e-ink, Python]
-  image: /assets/images/builds/eink-art-display.jpg
+  image: builds/eink-art-display.jpg
   blurb: >
     A Raspberry Pi powered e-ink frame that pulls fresh artwork from the
     internet: a quiet, paper-like picture that changes on its own.
@@ -38,10 +39,10 @@
   name: Sit / Stand Timer
   tags: [ultrasonic, microcontroller]
   images:
-    - /assets/images/builds/sit-stand-case.jpg
-    - /assets/images/builds/sit-stand-desk.jpg
-    - /assets/images/builds/sit-stand-circuit.jpg
-    - /assets/images/builds/sit-stand-sensors.jpg
+    - builds/sit-stand-case.jpg
+    - builds/sit-stand-desk.jpg
+    - builds/sit-stand-circuit.jpg
+    - builds/sit-stand-sensors.jpg
   blurb: >
     Two timers that track standing-desk up and down time using a sonar sensor: a
     gentle nudge to actually use the standing part.
@@ -50,7 +51,7 @@
   order: 5
   name: USB Morse Code Key
   tags: [HID, Android, retro]
-  image: /assets/images/builds/usb-morse-key.jpg
+  image: builds/usb-morse-key.jpg
   blurb: >
     A telegraph-style key that registers as an external keyboard. Tap out morse
     on an Android phone, or anything that takes a USB keyboard.
