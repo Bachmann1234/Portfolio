@@ -26,7 +26,11 @@
   order: 3
   name: Sit / Stand Timer
   tags: [ultrasonic, microcontroller]
-  image: /assets/images/builds/sit-stand-timer.jpg
+  images:
+    - /assets/images/builds/sit-stand-case.jpg
+    - /assets/images/builds/sit-stand-desk.jpg
+    - /assets/images/builds/sit-stand-circuit.jpg
+    - /assets/images/builds/sit-stand-sensors.jpg
   blurb: >
     Two timers that track standing-desk up and down time using a sonar sensor: a
     gentle nudge to actually use the standing part.
