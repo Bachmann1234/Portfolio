@@ -1,34 +1,57 @@
 # mattbachmann.dev
 
-Personal portfolio — a static "Maker's Journal" site showcasing software
-projects, hardware builds, and my résumé.
+Personal portfolio — a static "Maker's Journal" site for my résumé and, in time,
+write-ups of my software and hardware projects.
 
 Built from a [Claude Design](https://claude.ai/design) mockup. Plain
 HTML/CSS/JS, no build framework.
 
-## Structure
+## Branches
+
+- **`main`** — what's deployed: a minimal landing page + the full résumé. This
+  is intentionally slim while the rest is built out.
+- **`full-site`** — work in progress: the full four-page design (home, software,
+  hardware, résumé) with placeholder content being replaced page by page. Merges
+  into `main` when ready.
+
+## Structure (`main`)
 
 ```
-index.html        Home — hero + an "about me" moment (the dog)
-software.html     Software project grid
-hardware.html     Hardware builds (drag-and-drop photo slots)
-resume.html       Full résumé, rendered on the page
+index.html        Minimal landing page
+resume.html       Full résumé, rendered from the resume repo's resume.json
+templates/
+  resume.html.j2  Résumé layout template (content comes from resume.json)
+build_resume.py   Renders resume.html from resume.json
 assets/
   site.css        Design system: 3 color themes × light/dark, 2 font sets
   site.js         Theme / font / mode switching, persisted to localStorage
-  image-slot.js   Drag-and-drop photo slots used on the Hardware page
-  bernese.jpg     About-me photo
 ```
 
 Default look is **dark + Forest & Rust**; visitors can switch themes, fonts,
 and light/dark from the nav (their choice is remembered).
 
-## Résumé PDF
+## Résumé content & PDF
 
-The downloadable résumé (`resume.pdf`) is **not** checked in. It is built from
-the LaTeX source in [Bachmann1234/resume](https://github.com/Bachmann1234/resume)
-and dropped into the deploy at publish time, so the résumé has a single source
-of truth. (Deploy pipeline: TODO.)
+The résumé has a single source of truth in
+[Bachmann1234/resume](https://github.com/Bachmann1234/resume) (`resume.yaml`).
+That repo's CI publishes two artifacts to its `latest` release:
+
+- `resume.json` — rendered into `resume.html` by `build_resume.py`
+- `cv.pdf` — the downloadable résumé, dropped in as `resume.pdf` at deploy time
+  (git-ignored here)
+
+```
+https://github.com/Bachmann1234/resume/releases/download/latest/resume.json
+https://github.com/Bachmann1234/resume/releases/download/latest/cv.pdf
+```
+
+Refresh the résumé locally:
+
+```sh
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+# point at a local resume.json (sibling checkout) or a downloaded one
+.venv/bin/python build_resume.py [path/to/resume.json]
+```
 
 ## Hosting
 
@@ -42,8 +65,9 @@ python3 -m http.server 8000
 # then open http://localhost:8000
 ```
 
-## Still to fill in
+## Still to build (on `full-site`)
 
-- Real résumé content (experience / education / talks) — currently scaffolding.
-- Final software & hardware project lineup + write-ups.
+- Software project lineup + real write-ups.
+- Hardware builds + photos.
+- Restore full home page (hero, about, dog) and 4-way nav.
 - Contact email (placeholder `you@example.com` in footers).
