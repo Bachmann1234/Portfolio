@@ -18,8 +18,8 @@
   blurb: >
     Finds the lines a diff changed that still lack test coverage, so review and
     CI can focus on what is new instead of the whole codebase. It has become a
-    common fixture in Python CI pipelines, and I have put a lot of work into it
-    over the years as its maintainer.
+    common fixture in Python CI pipelines. As a maintainer I've been really impressed
+    with the work the wider community has contributed.
   links:
     - { label: "Repo →", url: "https://github.com/Bachmann1234/diff_cover" }
 
@@ -32,10 +32,10 @@
   alt: "Dark dashboard reading 86 degrees in the shop, with humidity, battery, and outside weather below"
   blurb: >
     A small web page that reports the live temperature inside my wife's woodshop,
-    so she can tell whether the glue will set and the finish will cure before she
-    walks out there. There was no public API for the sensor, so I snooped the
-    official app's calls and reverse engineered one. Tiny, sturdy, and used most
-    days.
+    so she can tell if its too hot to bother trying to work there.
+    There was no public API for the sensor, so I snooped the
+    official android app's calls and reverse engineered one. Tiny, sturdy, and used most
+    days. Learned about setting up a proxy and reverse engineering apis here.
   links:
     - { label: "Live →", url: "https://howhotistheshop.com/" }
     - { label: "Repo →", url: "https://github.com/Bachmann1234/HowHotIsTheShop" }
@@ -50,8 +50,8 @@
   blurb: >
     A native macOS menu bar app for my Sennheiser MOMENTUM 4 headphones: battery,
     noise control, equalizer, and multipoint, with no Electron in sight. Building
-    it meant reverse engineering the headphones' GAIA Bluetooth protocol over
-    RFCOMM to add multipoint, the equalizer commands, and live push updates.
+    on top of existing work I reverse engineered additional functionality and created
+    a form factor that felt natural to me.
   credit: >
     Built on zaval/sennheiser-desktop-client, which first reverse engineered the
     GAIA v3 command schema.
@@ -80,10 +80,13 @@
   status: { label: "Google Play", kind: "live" }
   image: projects/scoundroid.png
   alt: "Android version of the Scoundrel card game, showing a row of playing cards and a score counter"
+  credit: >
+    Original game design by Zach Gage and Kurt Bieg.
   blurb: >
     An Android build of Scoundrel, the single-deck rogue-like card game, written
-    in Kotlin and Jetpack Compose and shipped on the Google Play Store. Original
-    game design by Zach Gage and Kurt Bieg.
+    in Kotlin and Jetpack Compose and shipped on the Google Play Store. This taught
+    me a lot about the complexities of supporting a diverse array of device types and 
+    the google play release process.
   links:
     - { label: "Google Play →", url: "https://play.google.com/store/apps/details?id=dev.mattbachmann.scoundroid" }
     - { label: "Repo →", url: "https://github.com/Bachmann1234/scoundroid" }
@@ -97,8 +100,8 @@
   image: projects/macourtreporter.png
   alt: "Social profile banner with a smiling robot mascot and document icons on a blue background, labelled @MABillBot"
   blurb: >
-    Tracked and reported on the activities of the Massachusetts legislature.
+    Tracked and reported on bills proposed to the Massachusetts legislature.
     Retired now, but a fun experiment in turning dry civic data into something a
-    person would actually read.
+    person would actually read. Might revive someday
   links:
     - { label: "Repo →", url: "https://github.com/Bachmann1234/MACourtReporter" }
