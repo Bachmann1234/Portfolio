@@ -6,6 +6,7 @@ import Base from '../layouts/Base.astro';
     <section class="hero wrap">
       <div class="hero__grid">
         <div class="reveal in">
+          <img class="avatar" src="/assets/images/matt.jpg" alt="Matt Bachmann" width="84" height="84" />
           <span class="kicker">Software engineer · Maker · Medford, MA</span>
           <h1>I build <em>tools</em><br />and tinker with <em>things</em>.</h1>
           <p class="lede">
@@ -41,6 +42,7 @@ import Base from '../layouts/Base.astro';
           <span class="kicker">Off the clock</span>
           <h2>A little about me</h2>
           <p>When I'm not at a keyboard or a soldering iron, I'm usually out with my Bernese mountain dog, the unofficial inspiration for half the colors on this site (and most of the dog hair on my projects).</p>
+          <p>My wife, <a class="tlink" href="https://www.rprentki.com/">Rachel</a>, is a fine furniture maker trained at Boston's North Bennet Street School. She builds heirloom pieces by hand in the same woodshop I keep an eye on the temperature of, and a lot of my respect for things built to last comes from watching her work.</p>
           <p>I care about craft: code that's kind to the next person who reads it, and objects that feel good to use. This site is a place to keep the things I've made and the notes that go with them.</p>
           <div class="cta" style="margin-top:8px">
             <a class="tlink" href="https://github.com/Bachmann1234">github.com/Bachmann1234</a>
@@ -53,6 +55,7 @@ import Base from '../layouts/Base.astro';
 
 <style is:global>
   .hero { padding: clamp(56px, 10vw, 120px) 0 clamp(40px, 7vw, 80px); position: relative; }
+  .avatar { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; display: block; border: 2px solid var(--rule); box-shadow: var(--shadow); margin-bottom: 22px; }
   .hero__grid { display: grid; grid-template-columns: 1.4fr 0.9fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
   .hero h1 { font-size: clamp(52px, 9vw, 104px); line-height: 0.96; letter-spacing: -0.03em; margin: 22px 0 0; }
   .hero h1 em { font-style: italic; color: var(--accent-deep); }
