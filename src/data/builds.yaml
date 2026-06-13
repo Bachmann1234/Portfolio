@@ -1,12 +1,13 @@
 # Hardware builds from the Electronics-Drawer repo. `order` sets display order
-# (and the 01..NN index shown on the card). Add `image:` once a build photo
-# exists in /assets/builds/; until then the card shows the placeholder slot.
+# (and the 01..NN index shown on the card). `image:` points at a photo in
+# /assets/images/builds/; drop the `placeholder:` field instead to show an empty
+# slot for a build that has no photo yet.
 
 - id: cocktail-scale
   order: 1
   name: Cocktail Scale
   tags: [load cell, microcontroller, 3D print]
-  placeholder: Drop a photo of the cocktail scale
+  image: /assets/images/builds/cocktail-scale.jpg
   blurb: >
     A custom kitchen scale for the home bar. It measures cocktail ingredients by
     weight so every drink comes out balanced.
@@ -15,7 +16,7 @@
   order: 2
   name: Giant Button
   tags: [HID, QMK, mechanical]
-  placeholder: Drop a photo of the giant button
+  image: /assets/images/builds/giant-button.jpg
   blurb: >
     An oversized keyboard switch, programmable to fire any keystroke or macro.
     Equal parts useful shortcut and desk toy.
@@ -24,7 +25,7 @@
   order: 3
   name: E-ink Art Display
   tags: [Raspberry Pi, e-ink, Python]
-  placeholder: Drop a photo of the e-ink frame
+  image: /assets/images/builds/eink-art-display.jpg
   blurb: >
     A Raspberry Pi powered e-ink frame that pulls fresh artwork from the
     internet: a quiet, paper-like picture that changes on its own.
@@ -33,7 +34,7 @@
   order: 4
   name: Sit / Stand Timer
   tags: [ultrasonic, microcontroller]
-  placeholder: Drop a photo of the sit/stand timer
+  image: /assets/images/builds/sit-stand-timer.jpg
   blurb: >
     Two timers that track standing-desk up and down time using a sonar sensor: a
     gentle nudge to actually use the standing part.
@@ -42,7 +43,7 @@
   order: 5
   name: USB Morse Code Key
   tags: [HID, Android, retro]
-  placeholder: Drop a photo of the morse key
+  image: /assets/images/builds/usb-morse-key.jpg
   blurb: >
     A telegraph-style key that registers as an external keyboard. Tap out morse
     on an Android phone, or anything that takes a USB keyboard.
