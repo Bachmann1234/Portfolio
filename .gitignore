@@ -14,3 +14,10 @@ __pycache__/
 # Deploy build output / fetched résumé artifacts
 dist/
 resume.json
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
