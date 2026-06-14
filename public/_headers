@@ -1,0 +1,7 @@
+# Cloudflare honors this for static assets. Conservative security headers
+# (no strict CSP — would need careful tuning for inline styles + Google Fonts).
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), microphone=(), camera=()

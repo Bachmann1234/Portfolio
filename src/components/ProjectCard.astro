@@ -24,7 +24,7 @@ const { project: p, eager } = Astro.props;
       <span class:list={['status', `status--${p.status.kind}`]}>{p.status.label}</span>
     ) : null}
   </div>
-  <h3>{p.name}</h3>
+  <h2>{p.name}</h2>
   <p>{p.blurb}</p>
   {p.credit && <p class="proj__credit">{p.credit}</p>}
   <div class="proj__foot">

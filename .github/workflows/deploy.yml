@@ -24,10 +24,6 @@ on:
 permissions:
   contents: read
 
-# Run JS actions on Node 24 (Node 20 is deprecated on GitHub runners).
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 concurrency:
   group: deploy-pages
   cancel-in-progress: true
@@ -36,9 +32,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v6
         with:
           node-version: "24"
           cache: "npm"
@@ -61,7 +57,7 @@ jobs:
       # Reads wrangler.toml (name + [assets] directory = ./dist). Creates the
       # Worker on the first run, updates it after.
       - name: Deploy to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

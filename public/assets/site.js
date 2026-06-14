@@ -53,21 +53,29 @@
   // click-to-expand: any card image opens a full, uncropped view in the lightbox
   function lightbox() {
     var box = document.getElementById('lightbox');
-    if (!box) return;
+    if (!box || typeof box.showModal !== 'function') return; // needs <dialog>
     var bimg = box.querySelector('img');
     function open(src, alt) {
       bimg.setAttribute('src', src);
       bimg.alt = alt || '';
-      box.hidden = false;
+      box.showModal(); // native: focus trap + Escape + ::backdrop
     }
-    function close() { box.hidden = true; bimg.removeAttribute('src'); }
     document.querySelectorAll('.proj__media img, .build__media img').forEach(function (img) {
-      img.addEventListener('click', function () { open(img.currentSrc || img.src, img.alt); });
+      // make each card image a keyboard-operable trigger
+      img.setAttribute('tabindex', '0');
+      img.setAttribute('role', 'button');
+      function trigger() { open(img.currentSrc || img.src, img.alt); }
+      img.addEventListener('click', trigger);
+      img.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger(); }
+      });
     });
-    box.addEventListener('click', close); // backdrop or close button
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !box.hidden) close();
+    // close on a click outside the image (backdrop) or on the close button
+    box.addEventListener('click', function (e) {
+      if (e.target === box || e.target.classList.contains('lightbox__close')) box.close();
     });
+    // clear the src after close (Escape, button, or backdrop) to free memory
+    box.addEventListener('close', function () { bimg.removeAttribute('src'); });
   }
 
   function init() { reveals(); galleries(); lightbox(); }

@@ -1,10 +1,8 @@
 /* ============================================================
    Matt Bachmann — Portfolio  ·  "Maker's Journal"
    Shared stylesheet: theming, type, layout primitives
+   (Webfonts are loaded via <link> in Base.astro, not @import here.)
    ============================================================ */
-
-/* ---- Fonts ---- */
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
 /* ============================================================
    THEME TOKENS  ·  Forest & Rust, dark (the site's fixed look)
@@ -274,16 +272,18 @@ image-slot {
   html { scroll-behavior: auto; }
 }
 
-/* ---- Click-to-expand lightbox for card images ---- */
+/* ---- Click-to-expand lightbox for card images (native <dialog>) ---- */
 .proj__media img, .build__media img { cursor: zoom-in; }
+.proj__media img:focus-visible, .build__media img:focus-visible { outline: 2px solid var(--accent-deep); outline-offset: 3px; }
 .lightbox {
-  position: fixed; inset: 0; z-index: 200; display: grid; place-items: center;
-  padding: clamp(16px, 4vmin, 56px);
-  background: rgba(8, 9, 11, 0.86); backdrop-filter: blur(5px); cursor: zoom-out;
+  border: none; margin: auto; padding: clamp(16px, 4vmin, 56px);
+  width: 100%; height: 100%; max-width: 100vw; max-height: 100vh;
+  background: transparent; cursor: zoom-out;
 }
-.lightbox[hidden] { display: none; }
+.lightbox[open] { display: grid; place-items: center; }
+.lightbox::backdrop { background: rgba(8, 9, 11, 0.86); backdrop-filter: blur(5px); }
 .lightbox img {
-  max-width: 100%; max-height: 100%;
+  max-width: 100%; max-height: 100%; cursor: default;
   border-radius: 12px; box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
 }
 .lightbox__close {

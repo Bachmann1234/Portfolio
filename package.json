@@ -1,5 +1,5 @@
 {
-  "name": "portfolio-astro-poc",
+  "name": "portfolio",
   "type": "module",
   "version": "0.0.1",
   "private": true,
@@ -9,6 +9,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
     "astro": "^6.4.6",
     "js-yaml": "^4.2.0",
     "zod": "^4.4.3"

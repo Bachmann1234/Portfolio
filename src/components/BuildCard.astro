@@ -40,7 +40,7 @@ const photos = b.images?.length
     <div class="build__media build__media--empty"><span>{b.placeholder ?? 'Photo coming soon'}</span></div>
   )}
   <div class="build__body">
-    <div class="build__top"><h3>{b.name}</h3><span class="idx">{idx}</span></div>
+    <div class="build__top"><h2>{b.name}</h2><span class="idx">{idx}</span></div>
     <p>{b.blurb}</p>
     <div class="tags">{b.tags.map((t) => <span class="tag">{t}</span>)}</div>
   </div>

@@ -1,31 +1,60 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import '../styles/site.css'; // bundled + minified by Astro
 
 interface Props {
   title: string;
+  description?: string;
   active?: string;
 }
-const { title, active } = Astro.props;
+const {
+  title,
+  description = 'Matt Bachmann — Staff Software Engineer and maker in Medford, MA. Open-source tools, native apps, and hardware builds.',
+  active,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/assets/og.png', Astro.site).href;
 ---
 <!DOCTYPE html>
 <html lang="en" data-theme="forest" data-font="journal" data-mode="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <title>{title}</title>
-  <link rel="stylesheet" href="/assets/site.css" />
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta name="theme-color" content="#1b1712" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+
+  <!-- Open Graph / Twitter card -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Matt Bachmann" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <!-- Fonts: preconnect + stylesheet (faster than a CSS @import) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" />
 </head>
 <body>
   <Nav active={active} />
   <slot />
   <Footer />
-  <!-- click-to-expand lightbox for card images (wired in site.js) -->
-  <div id="lightbox" class="lightbox" hidden>
+  <!-- click-to-expand lightbox for card images (wired in site.js).
+       Native <dialog> gives focus trap, Escape, and ::backdrop for free. -->
+  <dialog id="lightbox" class="lightbox" aria-label="Expanded image">
     <button class="lightbox__close" type="button" aria-label="Close">×</button>
     <img alt="" />
-  </div>
+  </dialog>
   <script src="/assets/site.js" is:inline></script>
 </body>
 </html>
