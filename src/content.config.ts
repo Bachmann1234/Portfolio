@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { file } from 'astro/loaders';
+import { z } from 'zod';
 import yaml from 'js-yaml';
 
 // The running project list. One YAML file, same shape as the old projects.yaml,
@@ -23,7 +24,7 @@ const projects = defineCollection({
     credit: z.string().optional(),
     blurb: z.string(),
     links: z
-      .array(z.object({ label: z.string(), url: z.string().url() }))
+      .array(z.object({ label: z.string(), url: z.url() }))
       .default([]),
   }),
 });

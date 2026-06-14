@@ -9,8 +9,9 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^5",
-    "js-yaml": "^4.1.0"
+    "astro": "^6.4.6",
+    "js-yaml": "^4.2.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9"
