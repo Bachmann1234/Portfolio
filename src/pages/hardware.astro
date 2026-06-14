@@ -7,7 +7,11 @@ const builds = (await getCollection('builds')).sort(
   (a, b) => a.data.order - b.data.order,
 );
 ---
-<Base title="Hardware — Matt Bachmann" active="hardware">
+<Base
+  title="Hardware — Matt Bachmann"
+  description="Hardware builds from Matt Bachmann's electronics drawer: microcontroller projects, custom circuits, and 3D-printed gadgets that solve small, real problems."
+  active="hardware"
+>
   <main class="wrap">
     <header class="phead">
       <span class="kicker">02 / Workbench</span>

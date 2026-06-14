@@ -7,7 +7,11 @@ const projects = (await getCollection('projects')).sort(
   (a, b) => a.data.order - b.data.order,
 );
 ---
-<Base title="Software — Matt Bachmann" active="software">
+<Base
+  title="Software — Matt Bachmann"
+  description="Software Matt Bachmann has built: the open-source diff_cover, native macOS and Android apps, and small utilities that make a day a little better."
+  active="software"
+>
   <main class="wrap">
     <header class="phead">
       <span class="kicker">01 / Work</span>
