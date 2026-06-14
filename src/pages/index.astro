@@ -65,6 +65,9 @@ import bernese from '../assets/bernese.jpg';
   .hero { padding-block: clamp(56px, 10vw, 120px) clamp(40px, 7vw, 80px); position: relative; }
   .avatar { width: 132px; height: 132px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--rule); box-shadow: var(--shadow-lg); }
   .hero__grid { display: grid; grid-template-columns: 1.4fr 0.9fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
+  /* keep the kicker on one line; shrink it before it would wrap (tiny phones
+     fall back to wrapping via the small-width media query below) */
+  .hero .kicker { white-space: nowrap; font-size: clamp(10px, 2.6vw, 12px); letter-spacing: 0.14em; }
   .hero h1 { font-size: clamp(52px, 9vw, 104px); line-height: 0.96; letter-spacing: -0.03em; margin: 22px 0 0; }
   .hero h1 em { font-style: italic; color: var(--accent-deep); }
   .hero .lede { font-size: clamp(20px, 2.5vw, 25px); color: var(--ink-soft); max-width: 46ch; margin: 26px 0 30px; }
@@ -90,5 +93,9 @@ import bernese from '../assets/bernese.jpg';
     .about { grid-template-columns: 1fr; margin-top: clamp(40px, 9vw, 80px); }
     .about__photo { order: -1; }
     .about__photo img { height: clamp(260px, 55vw, 420px); }
+  }
+  @media (max-width: 380px) {
+    /* genuinely no room for one line at readable size — allow the wrap */
+    .hero .kicker { white-space: normal; }
   }
 </style>
