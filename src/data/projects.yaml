@@ -8,7 +8,7 @@
   order: 1
   name: diff_cover
   lang: Python
-  tags: [pytest, CI]
+  tags: [CI]
   stars: 838
   image: projects/diffcover.png
   alt: "Python code coverage report with uncovered lines highlighted in pink"
@@ -31,7 +31,7 @@
   order: 2
   name: marshmallow-polyfield
   lang: Python
-  tags: [serialization, OSS]
+  tags: [serialization]
   stars: 59
   image: projects/marshmallow-polyfield.png
   alt: "Python code defining a marshmallow schema with a PolyField that selects a sub-schema from the object's type at runtime"
