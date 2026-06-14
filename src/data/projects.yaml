@@ -20,8 +20,10 @@
     CI can focus on what is new instead of the whole codebase. It has grown into
     one of the more widely used tools of its kind: among the top thousand most
     downloaded packages on PyPI, and shipped in the official Debian and Fedora
-    Linux distributions. As a maintainer, I've been really impressed with the work
-    the wider community has contributed across its decade-plus of releases.
+    Linux distributions. You will find it running in the CI of projects like
+    Snowflake's Python connector, OpenStack, and PyPA's own setuptools. As a
+    maintainer, I've been really impressed with the work the wider community has
+    contributed across its decade-plus of releases.
   links:
     - { label: "Repo →", url: "https://github.com/Bachmann1234/diff_cover" }
 
@@ -37,8 +39,9 @@
     An unofficial extension to marshmallow, the Python serialization library, that
     adds polymorphic fields: schemas that decide how to read and write a value from
     its type at runtime. I wrote it back in 2015 and still maintain it. It is quietly
-    relied on by a lot of projects, around 150,000 downloads a month, which has been
-    a fun lesson in how a small, focused library can outlast the moment you wrote it.
+    relied on by projects like the Raiden Network, the FlexMeasures energy platform,
+    and the nitpick linter, around 150,000 downloads a month, which has been a fun
+    lesson in how a small, focused library can outlast the moment you wrote it.
   links:
     - { label: "PyPI →", url: "https://pypi.org/project/marshmallow-polyfield/" }
     - { label: "Repo →", url: "https://github.com/Bachmann1234/marshmallow-polyfield" }
