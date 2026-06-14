@@ -64,7 +64,7 @@
     - { label: "Repo →", url: "https://github.com/Bachmann1234/HowHotIsTheShop" }
 
 - id: smartcontrol
-  order: 4
+  order: 5
   name: SmartControl
   lang: Swift
   tags: [macOS, Bluetooth, reverse-engineering]
@@ -82,7 +82,7 @@
     - { label: "Repo →", url: "https://github.com/Bachmann1234/smartcontrol-mac" }
 
 - id: huecontrol
-  order: 5
+  order: 6
   name: hueControl
   lang: Swift
   tags: [macOS, SwiftUI]
@@ -96,7 +96,7 @@
     - { label: "Repo →", url: "https://github.com/Bachmann1234/hueControl" }
 
 - id: scoundroid
-  order: 6
+  order: 7
   name: Scoundroid
   lang: Kotlin
   tags: [Android, Jetpack Compose]
@@ -115,16 +115,17 @@
     - { label: "Repo →", url: "https://github.com/Bachmann1234/scoundroid" }
 
 - id: macourtreporter
-  order: 7
+  order: 4
   name: MACourtReporter
   lang: TypeScript
   tags: [civic data]
-  status: { label: "Retired", kind: "retired" }
+  status: { label: "Live", kind: "live" }
   image: projects/macourtreporter.png
   alt: "Social profile banner with a smiling robot mascot and document icons on a blue background, labelled @MABillBot"
   blurb: >
-    Tracked and reported on bills proposed in the Massachusetts legislature.
-    Retired now, but a fun experiment in turning dry civic data into something a
-    person would actually read. Might revive it someday.
+    Tracks and reports on bills proposed in the Massachusetts legislature,
+    posting updates to Bluesky. A fun experiment in surfacing public data in a 
+    social network.
   links:
+    - { label: "Bluesky →", url: "https://bsky.app/profile/mabillbot.mattbachmann.dev" }
     - { label: "Repo →", url: "https://github.com/Bachmann1234/MACourtReporter" }
