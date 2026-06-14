@@ -1,4 +1,4 @@
-# Hardware builds from the Electronics-Drawer repo. `order` sets display order
+# Hardware builds from the shop. `order` sets display order
 # (and the 01..NN index shown on the card). Photo paths are relative to
 # src/assets/ (resolved + optimized via src/lib/images.ts + Astro <Image>). Either:
 #   image:  builds/foo.jpg   + alt: "..."           (single)
