@@ -32,7 +32,7 @@
   alt: "Dark dashboard reading 86 degrees in the shop, with humidity, battery, and outside weather below"
   blurb: >
     A small web page that reports the live temperature inside my wife's woodshop,
-    so she can tell if it's too hot to bother trying to work there.
+    so she and her shopmates can tell if it's too hot to bother trying to work there.
     There was no public API for the sensor, so I snooped the
     official Android app's calls and reverse engineered one. Tiny, sturdy, and used most
     days. Learned about setting up a proxy and reverse engineering APIs.
