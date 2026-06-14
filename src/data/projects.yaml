@@ -51,6 +51,7 @@
   name: HowHotIsTheShop
   lang: Python
   tags: [web, IoT]
+  status: { label: "Live", kind: "live" }
   image: projects/howhotistheshop.png
   alt: "Dark dashboard reading 86 degrees in the shop, with humidity, battery, and outside weather below"
   blurb: >
