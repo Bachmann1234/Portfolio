@@ -17,14 +17,34 @@
     (diff-quality) with support from edX. I maintain it today.
   blurb: >
     Finds the lines a diff changed that still lack test coverage, so review and
-    CI can focus on what is new instead of the whole codebase. It has become a
-    common fixture in Python CI pipelines. As a maintainer, I've been really impressed
-    with the work the wider community has contributed.
+    CI can focus on what is new instead of the whole codebase. It has grown into
+    one of the more widely used tools of its kind: among the top thousand most
+    downloaded packages on PyPI, and shipped in the official Debian and Fedora
+    Linux distributions. As a maintainer, I've been really impressed with the work
+    the wider community has contributed across its decade-plus of releases.
   links:
     - { label: "Repo →", url: "https://github.com/Bachmann1234/diff_cover" }
 
-- id: howhotistheshop
+- id: marshmallow-polyfield
   order: 2
+  name: marshmallow-polyfield
+  lang: Python
+  tags: [serialization, OSS]
+  stars: 59
+  image: projects/marshmallow-polyfield.png
+  alt: "Python code defining a marshmallow schema with a PolyField that selects a sub-schema from the object's type at runtime"
+  blurb: >
+    An unofficial extension to marshmallow, the Python serialization library, that
+    adds polymorphic fields: schemas that decide how to read and write a value from
+    its type at runtime. I wrote it back in 2015 and still maintain it. It is quietly
+    relied on by a lot of projects, around 150,000 downloads a month, which has been
+    a fun lesson in how a small, focused library can outlast the moment you wrote it.
+  links:
+    - { label: "PyPI →", url: "https://pypi.org/project/marshmallow-polyfield/" }
+    - { label: "Repo →", url: "https://github.com/Bachmann1234/marshmallow-polyfield" }
+
+- id: howhotistheshop
+  order: 3
   name: HowHotIsTheShop
   lang: Python
   tags: [web, IoT]
@@ -41,7 +61,7 @@
     - { label: "Repo →", url: "https://github.com/Bachmann1234/HowHotIsTheShop" }
 
 - id: smartcontrol
-  order: 3
+  order: 4
   name: SmartControl
   lang: Swift
   tags: [macOS, Bluetooth, reverse-engineering]
@@ -59,7 +79,7 @@
     - { label: "Repo →", url: "https://github.com/Bachmann1234/smartcontrol-mac" }
 
 - id: huecontrol
-  order: 4
+  order: 5
   name: hueControl
   lang: Swift
   tags: [macOS, SwiftUI]
@@ -73,7 +93,7 @@
     - { label: "Repo →", url: "https://github.com/Bachmann1234/hueControl" }
 
 - id: scoundroid
-  order: 5
+  order: 6
   name: Scoundroid
   lang: Kotlin
   tags: [Android, Jetpack Compose]
@@ -92,7 +112,7 @@
     - { label: "Repo →", url: "https://github.com/Bachmann1234/scoundroid" }
 
 - id: macourtreporter
-  order: 6
+  order: 7
   name: MACourtReporter
   lang: TypeScript
   tags: [civic data]
