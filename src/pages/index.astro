@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import matt from '../assets/matt.jpg';
 import mattBazel from '../assets/matt-bazel.jpg';
 ---
 <Base
@@ -26,7 +25,6 @@ import mattBazel from '../assets/matt-bazel.jpg';
           </div>
         </div>
         <aside class="hero__aside reveal in">
-          <Image class="avatar" src={matt} alt="Matt Bachmann, a man with long grey hair, round glasses, and a beard, smiling" width={264} loading="eager" />
           <div class="nowcard">
             <h3>// currently</h3>
             <ul>
@@ -63,7 +61,6 @@ import mattBazel from '../assets/matt-bazel.jpg';
   /* vertical only — let .wrap own the horizontal gutter (a `padding` shorthand
      here would zero out .wrap's padding-inline and kill the side margin) */
   .hero { padding-block: clamp(56px, 10vw, 120px) clamp(40px, 7vw, 80px); position: relative; }
-  .avatar { width: 132px; height: 132px; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--rule); box-shadow: var(--shadow-lg); }
   .hero__grid { display: grid; grid-template-columns: 1.4fr 0.9fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
   /* keep the kicker on one line; shrink it before it would wrap (tiny phones
      fall back to wrapping via the small-width media query below) */
