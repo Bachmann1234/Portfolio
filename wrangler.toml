@@ -11,3 +11,6 @@ preview_urls = false
 
 [assets]
 directory = "./dist"
+# Serve dist/404.html (with a 404 status) for unknown paths. Without this,
+# Workers Static Assets returns a bare empty 404.
+not_found_handling = "404-page"
