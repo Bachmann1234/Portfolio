@@ -130,3 +130,22 @@
   links:
     - { label: "Bluesky →", url: "https://bsky.app/profile/mabillbot.mattbachmann.dev" }
     - { label: "Repo →", url: "https://github.com/Bachmann1234/MACourtReporter" }
+
+- id: bachmannholdem
+  order: 8
+  name: Bachmann Hold'em
+  lang: TypeScript
+  tags: [React, PWA, poker]
+  status: { label: "Live", kind: "live" }
+  image: projects/holdem.png
+  alt: "Texas Hold'em poker table on dark green felt, the player holding the ten of clubs and five of spades, with fold, call, and raise buttons below"
+  blurb: >
+    A Texas Hold'em training app I built to actually get better at the game. You
+    play hands against heuristic bots, and a coach walks you through the odds and
+    betting decisions on each move. The poker engine is pure TypeScript kept
+    separate from the UI so I could test it on its own, and it drives two front
+    ends: an installable, offline PWA and a terminal version built with Ink.
+    Equity simulations run in web workers so the table stays responsive.
+  links:
+    - { label: "Live →", url: "https://holdem.mattbachmann.dev/" }
+    - { label: "Repo →", url: "https://github.com/Bachmann1234/BachmannHoldem" }
